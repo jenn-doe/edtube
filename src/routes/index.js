@@ -1,20 +1,12 @@
 const express = require('express');
-const db = require('./../db');
+const db = require('../db');
+const tables = require('../tables');
 
 let router = express.Router();
 
-function getUsers() {
-  var getUsers = "SELECT * FROM tubeUser";
-  return db.any(getUsers);
-}
-
 router.get('/', (req, res, next) => {
   console.log('GET index');
-  getUsers().then((results) => {
-    res.render('index', {
-      results: results
-    });
-  });
+  res.redirect('/example'); 
 });
 
 module.exports = router;

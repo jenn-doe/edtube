@@ -1,4 +1,4 @@
 module.exports = {
-    postalCode: 'postalCode',
-    tubeUser: 'tubeUser'
+  postalCode: 'postalCode',
+  tubeUser: 'tubeUser'
 }
