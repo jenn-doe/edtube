@@ -14,8 +14,7 @@ function getPostalCodes() {
   return db.any(getPostalCodes);
 }
 
-router.get('/', (req, res, next) => {
-  console.log('GET example');
+function getDataAndRender(res) {
   Promise.all([getUsers(), getPostalCodes()])
     .then(([users, postalcodes]) => {
       res.render('example', {
@@ -23,6 +22,11 @@ router.get('/', (req, res, next) => {
         postalcodes: postalcodes
       });
   });
+}
+
+router.get('/', (req, res, next) => {
+  console.log('GET example');
+  getDataAndRender(res);
 });
 
 function insertPostalCode(postalcode, city, province) {
@@ -34,14 +38,8 @@ function insertPostalCode(postalcode, city, province) {
 router.post('/', (req, res, next) => {
   console.log('POST example');
   insertPostalCode(req.body.postalcode, req.body.city, req.body.province)
-    .then(() => Promise.all([getUsers(), getPostalCodes()]))
-    .then(([users, postalcodes]) => {
-      res.render('example', {
-        users: users,
-        postalcodes: postalcodes
-      });
-    })
-    .catch((err) => console.log(err));;
+    .then(getDataAndRender(res))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

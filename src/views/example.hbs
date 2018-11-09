@@ -12,17 +12,18 @@
   <h2>Users</h2>
   <ul>
     {{#each users}}
-      <li>{{uname}} {{name}} {{biography}} {{email}} {{postalcode}}</li>
+      <li>{{uname}}, {{name}}, {{biography}}, {{email}}, {{address}}, {{postalcode}}</li>
     {{/each}}
   </ul>
   <h2>Postal Codes</h2>
   <ul>
     {{#each postalcodes}}
-      <li>{{postalcode}} {{city}} {{province}}</li>
+      <li>{{postalcode}}, {{city}}, {{province}}</li>
     {{/each}}
   </ul>
   <form method="POST" action="/example">
-    <input type="text" name="postalcode" size="6"><input type="text" name="city" size="6"><input type="text" name="province" size="6">
+    <p>Postal Code&nbsp;&nbsp;&nbsp;City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Province</p>
+    <input type="text" name="postalcode" size="6">&nbsp;<input type="text" name="city" size="6">&nbsp;<input type="text" name="province" size="6">
     <input type="submit" value="Add Postal Code" name="insert"></p>
   </form>
 </body>
