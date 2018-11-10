@@ -9,4 +9,4 @@
 1. In your terminal, go to directory containing this file that you're reading
 2. `$ npm install` to download all the dependencies
 3. `$ npm start` to start the process with nodemon (it will reload the app when .js files are changed for fast iteration)
-4. In your browser, go to `localhost:8080` to see a basic html page reading test data from the database
+4. In your browser, go to `localhost:8000` to see a basic html page reading test data from the database
