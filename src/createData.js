@@ -25,9 +25,9 @@ function dropTables() {
 function createTablePostalCode() {
   const sql = `
     CREATE TABLE PostalCode(
-      postalCode		VARCHAR(6),
-      city			    VARCHAR(40),
-      province		  VARCHAR(40),
+      postalCode  VARCHAR(6),
+      city			  VARCHAR(40),
+      province		VARCHAR(40),
       PRIMARY KEY (postalCode)
     );`;
   return db.any(sql);
@@ -45,12 +45,12 @@ function insertPostalCode() {
 function createTableTubeUser() {
   const sql = `
     CREATE TABLE TubeUser(
-      uName			VARCHAR(40),
+      uName			  VARCHAR(40),
       biography		VARCHAR(280),
-      name			VARCHAR(40),
-      email			VARCHAR(40),
-      address		VARCHAR(40),
-      postalCode		VARCHAR(6),
+      name			  VARCHAR(40),
+      email			  VARCHAR(40),
+      address		  VARCHAR(40),
+      postalCode  VARCHAR(6),
       PRIMARY KEY (uName),
       FOREIGN KEY (postalCode) REFERENCES PostalCode
         ON DELETE SET NULL
@@ -78,7 +78,7 @@ function createTableVideoPostedAtContains() {
       cName			    VARCHAR(40) NOT NULL,
       date			    INTEGER NOT NULL,
       time			    INTEGER NOT NULL,
-      storageServer		VARCHAR(40) NOT NULL,
+      storageServer	VARCHAR(40) NOT NULL,
       PRIMARY KEY (vID),
       FOREIGN KEY (cName) REFERENCES Channel_Owns_BelongsTo
         ON DELETE CASCADE
@@ -144,10 +144,10 @@ function insertFollows() {
 function createTableChannelOwnsBelongsTo() {
   const sql =`
     CREATE TABLE Channel_Owns_BelongsTo(
-      cName			    VARCHAR(40),
-      description		VARCHAR(280),
-      uName			    VARCHAR(40) NOT NULL,
-      nName			    VARCHAR(40),
+      cName			  VARCHAR(40),
+      description	VARCHAR(280),
+      uName			  VARCHAR(40) NOT NULL,
+      nName			  VARCHAR(40),
       PRIMARY KEY (cName),
       FOREIGN KEY (uName) REFERENCES TubeUser
         ON DELETE CASCADE
@@ -232,12 +232,12 @@ function insertDateTime() {
 function createTableCommentWrites() {
   const sql =`
     CREATE TABLE Comment_Writes(
-      cID			INTEGER,
-      text		VARCHAR(280) NOT NULL,
-      date		INTEGER NOT NULL,
-      time		INTEGER NOT NULL,
-      uName		VARCHAR(40) NOT NULL,
-      vID			INTEGER NOT NULL,
+      cID			    INTEGER,
+      text		    VARCHAR(280) NOT NULL,
+      date		    INTEGER NOT NULL,
+      time		    INTEGER NOT NULL,
+      uName		    VARCHAR(40) NOT NULL,
+      vID			    INTEGER NOT NULL,
       PRIMARY KEY (cID),
       FOREIGN KEY (date, time) REFERENCES DateTime
         ON DELETE NO ACTION
@@ -307,9 +307,9 @@ function insertPlaylistCreates() {
 function createTablePartOf() {
   const sql =`
     CREATE TABLE PartOf(
-      pName			VARCHAR(40),
-      uName			VARCHAR(40),
-      vID			  INTEGER,
+      pName			  VARCHAR(40),
+      uName			  VARCHAR(40),
+      vID			    INTEGER,
       PRIMARY KEY (pName, uName, vID),
       FOREIGN KEY (pName, uName) REFERENCES Playlist_Creates
         ON DELETE CASCADE
@@ -353,8 +353,8 @@ function insertCategory() {
 function createTableClassified() {
   const sql =`
     CREATE TABLE Classified(
-      vID			  INTEGER,
-      catName		VARCHAR(40),
+      vID			    INTEGER,
+      catName		  VARCHAR(40),
       PRIMARY KEY (vID, catName),
       FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
         ON DELETE CASCADE
