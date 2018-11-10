@@ -1,5 +1,4 @@
 const db = require('./db');
-const tables = require('./tables');
 
 function dropTables() {
   const sql = `
@@ -36,7 +35,7 @@ function createTablePostalCode() {
 
 function insertPostalCode() {
   const sql = `
-    INSERT INTO ${tables.postalCode} VALUES
+    INSERT INTO PostalCode VALUES
       ('A1B2C3', 'Toronto', 'Ontario'),
       ('V1N2K5', 'Vancouver', 'British Columbia')
     ;`;
@@ -62,7 +61,7 @@ function createTableTubeUser() {
 
 function insertTubeUser() {
   const sql = `
-    INSERT INTO ${tables.tubeUser} VALUES
+    INSERT INTO TubeUser VALUES
       ('julez', 'Im sparkling', 'Julie Jones', 'julez@jjmail.com', '123 Bloor St', 'A1B2C3'),
       ('choo', 'Fun times', 'Chris Kross', 'chrisk@umail.com', '554 Broadway St', 'V1N2K5')
     ;`;

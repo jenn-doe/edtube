@@ -1,6 +1,4 @@
 const express = require('express');
-const db = require('../db');
-const tables = require('../tables');
 
 let router = express.Router();
 

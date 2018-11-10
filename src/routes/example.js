@@ -1,16 +1,15 @@
 const express = require('express');
 const db = require('../db');
-const tables = require('../tables');
 
 let router = express.Router();
 
 function getUsers() {
-  var getUsers = `SELECT * FROM ${tables.tubeUser}`;
+  var getUsers = `SELECT * FROM TubeUser`;
   return db.any(getUsers);
 }
 
 function getPostalCodes() {
-  var getPostalCodes = `SELECT * FROM ${tables.postalCode}`;
+  var getPostalCodes = `SELECT * FROM PostalCode`;
   return db.any(getPostalCodes);
 }
 
@@ -30,7 +29,7 @@ router.get('/', (req, res, next) => {
 });
 
 function insertPostalCode(postalcode, city, province) {
-  var insertPostalCode = `INSERT INTO ${tables.postalCode} VALUES
+  var insertPostalCode = `INSERT INTO PostalCode VALUES
     ('${postalcode}', '${city}', '${province}');`
   return db.any(insertPostalCode);
 }
