@@ -42,6 +42,80 @@ function insertPostalCode() {
   return db.any(sql);
 }
 
+function createTableCategory() {
+  const sql =`
+  CREATE TABLE Category(
+    catName		  VARCHAR(40),
+    description	VARCHAR(280),
+    PRIMARY KEY (catName)
+  )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertCategory() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTableStorage() {
+  const sql =`
+    CREATE TABLE Storage(
+      storageServer		VARCHAR(40),
+      storageRegion		VARCHAR(40),
+      PRIMARY KEY (storageServer)
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertStorage() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTableDateTime() {
+  const sql =`
+    CREATE TABLE DateTime(
+      date			INTEGER,
+      time			INTEGER,
+      PRIMARY KEY (date, time)
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertDateTime() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTableNetwork() {
+  const sql =`
+    CREATE TABLE Network(
+      nName		   	VARCHAR(40),
+      rate			  INTEGER,
+      description	VARCHAR(280),
+      email		   	VARCHAR(40),
+      PRIMARY KEY (nName)
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertNetwork() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
 function createTableTubeUser() {
   const sql = `
     CREATE TABLE TubeUser(
@@ -68,48 +142,22 @@ function insertTubeUser() {
   return db.any(sql);
 }
 
-function createTableVideoPostedAtContains() {
+function createTablePlaylistCreates() {
   const sql =`
-    CREATE TABLE Video_PostedAt_Contains(
-      vID			      INTEGER,
-      description		VARCHAR(280),
-      vName			    VARCHAR(40) NOT NULL,
-      playtime		  INTEGER NOT NULL,
-      cName			    VARCHAR(40) NOT NULL,
-      date			    INTEGER NOT NULL,
-      time			    INTEGER NOT NULL,
-      storageServer	VARCHAR(40) NOT NULL,
-      PRIMARY KEY (vID),
-      FOREIGN KEY (cName) REFERENCES Channel_Owns_BelongsTo
+    CREATE TABLE Playlist_Creates(
+      pName			  VARCHAR(40),
+      description	VARCHAR(280),
+      uName		   	VARCHAR(40),
+      PRIMARY KEY (uName, pName),
+      FOREIGN KEY (uName) REFERENCES TubeUser
         ON DELETE CASCADE
-        ON UPDATE CASCADE,
-      FOREIGN KEY (date, time) REFERENCES DateTime
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION
+        ON UPDATE CASCADE
     )`;
   return db.any(sql);
 }
 
 // TODO
-function insertVideoPostedAtContains() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-function createTableStorage() {
-  const sql =`
-    CREATE TABLE Storage(
-      storageServer		VARCHAR(40),
-      storageRegion		VARCHAR(40),
-      PRIMARY KEY (storageServer)
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertStorage() {
+function insertPlaylistCreates() {
   const sql =`
   
   `;
@@ -167,26 +215,6 @@ function insertChannelOwnsBelongsTo() {
   //return db.any(sql);
 }
 
-function createTableNetwork() {
-  const sql =`
-    CREATE TABLE Network(
-      nName		   	VARCHAR(40),
-      rate			  INTEGER,
-      description	VARCHAR(280),
-      email		   	VARCHAR(40),
-      PRIMARY KEY (nName)
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertNetwork() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
 function createTableSubscribe() {
   const sql =`
     CREATE TABLE Subscribe(
@@ -211,18 +239,104 @@ function insertSubscribe() {
   //return db.any(sql);
 }
 
-function createTableDateTime() {
+function createTableVideoPostedAtContains() {
   const sql =`
-    CREATE TABLE DateTime(
-      date			INTEGER,
-      time			INTEGER,
-      PRIMARY KEY (date, time)
+    CREATE TABLE Video_PostedAt_Contains(
+      vID			      INTEGER,
+      description		VARCHAR(280),
+      vName			    VARCHAR(40) NOT NULL,
+      playtime		  INTEGER NOT NULL,
+      cName			    VARCHAR(40) NOT NULL,
+      date			    INTEGER NOT NULL,
+      time			    INTEGER NOT NULL,
+      storageServer	VARCHAR(40) NOT NULL,
+      PRIMARY KEY (vID),
+      FOREIGN KEY (cName) REFERENCES Channel_Owns_BelongsTo
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+      FOREIGN KEY (date, time) REFERENCES DateTime
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
     )`;
   return db.any(sql);
 }
 
 // TODO
-function insertDateTime() {
+function insertVideoPostedAtContains() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTableMonetized() {
+  const sql =`
+    CREATE TABLE Monetized(
+      vID			    INTEGER,
+      feePaid		  INTEGER,
+      ratePerView	INTEGER,
+      PRIMARY KEY (vID),
+      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertMonetized() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTablePartOf() {
+  const sql =`
+    CREATE TABLE PartOf(
+      pName			  VARCHAR(40),
+      uName			  VARCHAR(40),
+      vID			    INTEGER,
+      PRIMARY KEY (pName, uName, vID),
+      FOREIGN KEY (pName, uName) REFERENCES Playlist_Creates
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+      FOREIGN KEY (uName) REFERENCES TubeUser
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertPartOf() {
+  const sql =`
+  
+  `;
+  //return db.any(sql);
+}
+
+function createTableClassified() {
+  const sql =`
+    CREATE TABLE Classified(
+      vID			    INTEGER,
+      catName		  VARCHAR(40),
+      PRIMARY KEY (vID, catName),
+      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+      FOREIGN KEY (catName) REFERENCES Category
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+    )`;
+  return db.any(sql);
+}
+
+// TODO
+function insertClassified() {
   const sql =`
   
   `;
@@ -260,121 +374,7 @@ function insertCommentWrites() {
   //return db.any(sql);
 }
 
-function createTableMonetized() {
-  const sql =`
-    CREATE TABLE Monetized(
-      vID			    INTEGER,
-      feePaid		  INTEGER,
-      ratePerView	INTEGER,
-      PRIMARY KEY (vID),
-      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertMonetized() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-function createTablePlaylistCreates() {
-  const sql =`
-    CREATE TABLE Playlist_Creates(
-      pName			  VARCHAR(40),
-      description	VARCHAR(280),
-      uName		   	VARCHAR(40),
-      PRIMARY KEY (uName, pName),
-      FOREIGN KEY (uName) REFERENCES TubeUser
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertPlaylistCreates() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-function createTablePartOf() {
-  const sql =`
-    CREATE TABLE PartOf(
-      pName			  VARCHAR(40),
-      uName			  VARCHAR(40),
-      vID			    INTEGER,
-      PRIMARY KEY (pName, uName, vID),
-      FOREIGN KEY (pName, uName) REFERENCES Playlist_Creates
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-      FOREIGN KEY (uName) REFERENCES TubeUser
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertPartOf() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-function createTableCategory() {
-  const sql =`
-  CREATE TABLE Category(
-    catName		  VARCHAR(40),
-    description	VARCHAR(280),
-    PRIMARY KEY (catName)
-  )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertCategory() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-function createTableClassified() {
-  const sql =`
-    CREATE TABLE Classified(
-      vID			    INTEGER,
-      catName		  VARCHAR(40),
-      PRIMARY KEY (vID, catName),
-      FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-      FOREIGN KEY (catName) REFERENCES Category
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-    )`;
-  return db.any(sql);
-}
-
-// TODO
-function insertClassified() {
-  const sql =`
-  
-  `;
-  //return db.any(sql);
-}
-
-module.exports = function createTables() {
+module.exports = function createData() {
   dropTables()
     // tables with no foreign key references
     .then(createTablePostalCode)
