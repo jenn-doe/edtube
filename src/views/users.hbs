@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>EdTube</title>
+    <link rel="stylesheet" type="text/css" href="../sass/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="nav">
+        <ul class="nav-list">
+            <span class="nav-left">
+                <li class="nav-burger">
+                    <div class="nav-burger--line"></div>
+                    <div class="nav-burger--line"></div>
+                    <div class="nav-burger--line"></div>
+                </li>
+                <li class="nav-logo">
+                    <img class="nav-logo--img" src="/et_logo.png">
+                </li>
+                <span class="navlinks">
+                    <li>
+                        <button class="navlink" id="userslink" href="/users">Users</button>
+                    </li>
+                    <li>
+                        <button class="navlink" id="playlistslink" href="/playlists">Playlists</button>
+                    </li>
+                    <li>
+                        <button class="navlink" id="trendinglink" href="/trending">Trending</button>
+                    </li>
+                </span>
+            </span>
+            <span class="nav-right">
+                <li><i class="fas fa-video-plus"></i></li>
+                <li><i class="fas fa-th"></i></li>
+                <li><i class="fas fa-comment"></i></li>
+                <li><i class="fas fa-bell"></i></li>
+            </span>
+        </ul>
+    </div>
+    <div class="main">
+        <h1>Welcome To Eddy Tube</h1>
+        <h2>Users</h2>
+        <ul>
+            {{#each users}}
+            <li>{{uname}}, {{name}}, {{biography}}, {{email}}, {{address}}, {{postalcode}}</li>
+            {{/each}}
+        </ul>
+        <h2>Postal Codes</h2>
+        <ul>
+            {{#each postalcodes}}
+            <li>{{postalcode}}, {{city}}, {{province}}</li>
+            {{/each}}
+        </ul>
+        {{!-- add a user --}}
+        <form method="POST" action="/users">
+            <p>Add new user</p>
+            <input type="text" name="input-username" size="6" placeholder="Username (required)">
+            <input type="text" name="input-biography" size="6" placeholder="Bio">
+            <input type="text" name="input-name" size="6" placeholder="Name">
+            <input type="text" name="input-email" size="6" placeholder="Email">
+            <input type="text" name="input-address" size="6" placeholder="Address">
+            <input type="text" name="input-postalcode" size="6" placeholder="Postal code">
+            <input type="submit" value="Add user" name="insert-user"></p>
+
+            {{!-- <p>Username&nbsp;&nbsp;&nbsp;City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Province</p>
+            <input type="text" name="postalcode" size="6">&nbsp;<input type="text" name="city" size="6">&nbsp;<input
+                type="text" name="province" size="6">
+            <input type="submit" value="Add Postal Code" name="insert"></p> --}}
+        </form>
+        {{!-- delete a user's videos --}}
+        {{!-- update a user's biography --}}
+        {{!-- get all videos that belong to a user's channel --}}
+        {{!-- get all users a user follows (follower list) --}}
+        <form method="POST" action="/users">
+            <p>Postal Code&nbsp;&nbsp;&nbsp;City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Province</p>
+            <input type="text" name="postalcode" size="6">&nbsp;<input type="text" name="city" size="6">&nbsp;<input
+                type="text" name="province" size="6">
+            <input type="submit" value="Add Postal Code" name="insert"></p>
+        </form>
+    </div>
+</body>
+
+</html>

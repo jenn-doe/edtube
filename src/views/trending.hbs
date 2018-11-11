@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="../sass/style.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -22,10 +23,17 @@
         <li class="nav-logo">
           <img class="nav-logo--img" src="/et_logo.png">
         </li>
-        <li>
-          <input class="nav-searchbox" type="text" name="search" />
-          <button class="nav-searchbutton" type="submit"><i class="fa fa-search nav-searchbutton--icon"></i></button>
-        </li>
+        <span class="navlinks">
+          <li>
+            <a class="navlink active" id="userslink" href="user">Users</a>
+          </li>
+          <li>
+            <a class="navlink" id="playlistslink" href="playlist">Playlists</a>
+          </li>
+          <li>
+            <a class="navlink" id="trendinglink" href="trending">Trending</a>
+          </li>
+        </span>
       </span>
       <span class="nav-right">
         <li><i class="fas fa-video-plus"></i></li>
@@ -37,7 +45,22 @@
   </div>
   <div class="main">
     <h1>Welcome To Eddy Tube</h1>
-    <h2>Playlists</h2>
+    <h2>Trending</h2>
+    {{!-- find channels by postal code --}}
+    <form method="POST" action="/users">
+      <p>List channels by postal code</p>
+      <div class="tubeinput">
+        <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
+        <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Add user" name="insert-user"></p>
+      </div>
+    </form>
+    {{!-- get category with most videos --}}
+    <form method="POST" action="/users">
+      <p>Get category with most videos</p>
+      <div class="tubeinput">
+        <input id="trending-category" class="form-control btn btn-danger" type="submit" value="Get category" name="get-category"></p>
+      </div>
+    </form>
     <ul>
       {{#each playlists}}
       <li>{{pname}}, {{description}}, {{uname}}</li>

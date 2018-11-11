@@ -20,9 +20,9 @@ body {
       display: flex;
       flex-direction: row;
       border-bottom: 1px solid lightgrey;
-      padding: 1px 25px 15px 25px;
       justify-content: space-between;
       align-items: center;
+      padding: 12px;
 
       .nav-left {
         display: flex;
@@ -41,17 +41,29 @@ body {
           height: 24px;
           margin: 0 20px;
         }
+      }
 
-        .nav-searchbox {
-          width: 185px;
-          height: 20px;
-          border-radius: 1px;
+      .navlinks {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        a {
+          background-color: inherit;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+          font-size: 17px;
         }
-
-        .nav-searchbutton {
-          height: 25px;
-          width: 50px;
-          margin-left: -7px;
+        a:hover {
+          background-color: #ddd;
+          // border-bottom: 1px solid black;
+          text-decoration: underline;
+          text-decoration-color: grey;
+        }
+        a .active {
+          background-color: #ccc;
         }
       }
 
@@ -62,6 +74,17 @@ body {
         }
       }
     }
+  }
+
+  .tubeinput {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // bootstrap overrides
+  .form-control {
+    margin: 3px;
+    max-width: 250px;
   }
 
   .main {
