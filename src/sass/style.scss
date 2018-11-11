@@ -1,8 +1,9 @@
 $font-stack: "Roboto", sans-serif;
 $primary-link-color: #00b7ff;
-$color-red: #ff0000;
+$color-red: #e52d27;
 $color-almost-black: #282828;
 $color-grey: grey;
+$color-light-grey: #ddd;
 $icon-size: 16px;
 
 body {
@@ -15,11 +16,13 @@ body {
   }
 
   .nav {
+    background-color: white;
     .nav-list {
+      border-bottom: 1px solid $color-light-grey;
+      box-shadow: 0px 0px 3px 1px $color-light-grey;
       list-style-type: none;
       display: flex;
       flex-direction: row;
-      border-bottom: 1px solid lightgrey;
       justify-content: space-between;
       align-items: center;
       padding: 12px;
@@ -81,13 +84,46 @@ body {
     flex-direction: column;
   }
 
+  .main {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .results-section {
+      margin-left: 3em;
+      margin-top: 10em;
+      margin: 10em 0 3em 3em;
+      display: flex;
+      flex-direction: column;
+
+      .results-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 6px;
+        th {
+          background-color: $color-almost-black;
+          color: white;
+        }
+        th,
+        td {
+          text-align: left;
+          padding: 8px;
+        }
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+
   // bootstrap overrides
   .form-control {
     margin: 3px;
     max-width: 250px;
   }
 
-  .main {
-    margin: 15px;
+  .btn-danger {
+    background-color: $color-red;
   }
 }

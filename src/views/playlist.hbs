@@ -44,37 +44,63 @@
     </ul>
   </div>
   <div class="main">
-    <h1>Welcome To Eddy Tube</h1>
-    <h2>Playlists</h2>
-    {{!-- get playlist complexion --}}
-    <form method="POST" action="/users">
-      <p>Display number of videos from different channels in a playlist</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
-        <input id="playlists-channels" class="form-control btn btn-info" type="submit" value="Add user" name="insert-user"></p>
-      </div>
-    </form>
-    {{!-- get all videos from a playlist --}}
-    <form method="POST" action="/users">
-      <p>Get all videos from a playlist</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
-        <input id="playlist-getall" class="form-control btn btn-info" type="submit" value="Get videos" name="delete-user-vids"></p>
-      </div>
-    </form>
-    {{!-- delete a playlist --}}
-    <form method="POST" action="/users">
-      <p>Delete a playlist</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
-        <input id="playlist-delete" class="form-control btn btn-danger" type="submit" value="Delete playlist" name="delete-user-vids"></p>
-      </div>
-    </form>
-    <ul>
-      {{#each playlists}}
-      <li>{{pname}}, {{description}}, {{uname}}</li>
-      {{/each}}
-    </ul>
+    <div class="input-section">
+      <h1>Welcome To Eddy Tube</h1>
+      <h2>Playlists</h2>
+      {{!-- get playlist complexion --}}
+      <form method="POST" action="/users">
+        <p>Display number of videos from different channels in a playlist</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
+          <input id="playlists-channels" class="form-control btn btn-info" type="submit" value="Get number of videos"
+            name="insert-user"></p>
+        </div>
+      </form>
+      {{!-- get all videos from a playlist --}}
+      <form method="POST" action="/users">
+        <p>Get all videos from a playlist</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
+          <input id="playlist-getall" class="form-control btn btn-info" type="submit" value="Get videos" name="delete-user-vids"></p>
+        </div>
+      </form>
+      {{!-- delete a playlist --}}
+      <form method="POST" action="/users">
+        <p>Delete a playlist</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
+          <input id="playlist-delete" class="form-control btn btn-danger" type="submit" value="Delete playlist" name="delete-user-vids"></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="results-section">
+      {{!-- complete playlists table --}}
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Playlist Name</th>
+            <th>Description</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each playlists}}
+          <tr>
+            <td>{{pname}}</td>
+            <td>{{description}}</td>
+            <td>{{uname}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      {{!-- <ul>
+        {{#each playlists}}
+        <li>{{pname}}, {{description}}, {{uname}}</li>
+        {{/each}}
+      </ul> --}}
+    </div>
   </div>
 </body>
 

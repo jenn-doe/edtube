@@ -44,59 +44,84 @@
     </ul>
   </div>
   <div class="main">
-    <h1>Welcome To Eddy Tube</h1>
-    <h2>Users</h2>
-    {{!-- add a user --}}
-    <form method="POST" action="/user">
-      <p>Add new user</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-username" placeholder="Username (required)">
-        <input class="form-control" type="text" name="input-biography" placeholder="Bio">
-        <input class="form-control" type="text" name="input-name" placeholder="Name">
-        <input class="form-control" type="text" name="input-email" placeholder="Email">
-        <input class="form-control" type="text" name="input-address" placeholder="Address">
-        <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
-        <input id="user-add" class="form-control btn btn-info" type="submit" value="Add user" name="insert-user"></p>
-      </div>
-    </form>
-    {{!-- delete a user's videos --}}
-    <form method="POST" action="/user">
-      <p>Delete a user's videos</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-username" placeholder="Username">
-        <input id="user-deletevideos" class="form-control btn btn-danger" type="submit" value="Delete videos" name="delete-user-vids"></p>
-      </div>
-    </form>
-    {{!-- update a user's biography --}}
-    <form method="POST" action="/user">
-      <p>Update a user's biography</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-username" placeholder="Username">
-        <input class="form-control" type="text" name="input-bio" placeholder="Bio">
-        <input id="user-updatebio" class="form-control btn btn-info" type="submit" value="Update bio" name="update-bio"></p>
-      </div>
-    </form>
-    {{!-- get all videos that belong to a user's channel --}}
-    <form method="POST" action="/user">
-      <p>List all videos on a channel</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-cname" placeholder="Channel name">
-        <input id="user-allvideos" class="form-control btn btn-info" type="submit" value="Get videos" name="get-videos-channel"></p>
-      </div>
-    </form>
-    {{!-- get all users a user follows (follower list) --}}
-    <form method="POST" action="/user">
-      <p>List a user's following</p>
-      <div class="tubeinput">
-        <input class="form-control" type="text" name="input-username" placeholder="Username">
-        <input id="user-following" class="form-control btn btn-info" type="submit" value="Get following" name="get-following"></p>
-      </div>
-    </form>
-    <ul>
-      {{#each users}}
-      <li>{{uname}}, {{name}}, {{biography}}, {{email}}, {{address}}, {{postalcode}}</li>
-      {{/each}}
-    </ul>
+    <div class="input-section">
+      <h1>Welcome To Eddy Tube</h1>
+      <h2>Users</h2>
+      {{!-- add a user --}}
+      <form method="POST" action="/user">
+        <p>Add new user</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-username" placeholder="Username (required)">
+          <input class="form-control" type="text" name="input-biography" placeholder="Bio">
+          <input class="form-control" type="text" name="input-name" placeholder="Name">
+          <input class="form-control" type="text" name="input-email" placeholder="Email">
+          <input class="form-control" type="text" name="input-address" placeholder="Address">
+          <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
+          <input id="user-add" class="form-control btn btn-info" type="submit" value="Add user" name="insert-user"></p>
+        </div>
+      </form>
+      {{!-- delete a user's videos --}}
+      <form method="POST" action="/user">
+        <p>Delete a user's videos</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-username" placeholder="Username">
+          <input id="user-deletevideos" class="form-control btn btn-danger" type="submit" value="Delete videos" name="delete-user-vids"></p>
+        </div>
+      </form>
+      {{!-- update a user's biography --}}
+      <form method="POST" action="/user">
+        <p>Update a user's biography</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-username" placeholder="Username">
+          <input class="form-control" type="text" name="input-bio" placeholder="Bio">
+          <input id="user-updatebio" class="form-control btn btn-info" type="submit" value="Update bio" name="update-bio"></p>
+        </div>
+      </form>
+      {{!-- get all videos that belong to a user's channel --}}
+      <form method="POST" action="/user">
+        <p>List all videos on a channel</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-cname" placeholder="Channel name">
+          <input id="user-allvideos" class="form-control btn btn-info" type="submit" value="Get videos" name="get-videos-channel"></p>
+        </div>
+      </form>
+      {{!-- get all users a user follows (follower list) --}}
+      <form method="POST" action="/user">
+        <p>Get a user's followers</p>
+        <div class="tubeinput">
+          <input class="form-control" type="text" name="input-username" placeholder="Username">
+          <input id="user-following" class="form-control btn btn-info" type="submit" value="Get following" name="get-following"></p>
+        </div>
+      </form>
+    </div>
+
+    {{!-- results table --}}
+    <div class="results-section">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Biography</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Postal code</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
+            <td>{{uname}}</td>
+            <td>{{name}}</td>
+            <td>{{biography}}</td>
+            <td>{{email}}</td>
+            <td>{{address}}</td>
+            <td>{{postalcode}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>
 
