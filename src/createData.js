@@ -52,12 +52,22 @@ function createTableCategory() {
   return db.any(sql);
 }
 
-// TODO
 function insertCategory() {
   const sql =`
-  
+    INSERT INTO Category VALUES
+      ('Comedy', 'Videos that will tickle your funny bone'),
+      ('Animals', 'Videos containing cute animals'),
+      ('Adventure', 'Videos of explorers'),
+      ('Music', 'Videos that have some sort of music'),
+      ('Dance', 'Videos you can dance to'),
+      ('Songs', 'Videos containing songs'),
+      ('Upbeat', 'Videos that are upbeat and cheerful'),
+      ('Chill', 'Videos you can chill to'),
+      ('Cooking', 'Videos about cooking'),
+      ('GlutenFree', 'Videos for the gluten free eaters'),
+      ('Desserts', 'Videos for desserts!')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableStorage() {
@@ -73,9 +83,12 @@ function createTableStorage() {
 // TODO
 function insertStorage() {
   const sql =`
-  
+    INSERT INTO Storage VALUES
+      ('MapleLeaf', 'Quebec'),
+      ('GreenLeaf', 'WestCoast'),
+      ('Maritimes', 'EastCoast')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableDateTime() {
@@ -91,9 +104,26 @@ function createTableDateTime() {
 // TODO
 function insertDateTime() {
   const sql =`
-  
+    INSERT INTO DateTime VALUES
+    (01012018, 1147),
+    (02032017, 2230),
+    (06272018, 2318),
+    (06282018, 0023),
+    (06282018, 0027),
+    (02222018, 1312),
+    (02232018, 1426),
+    (03142017, 2201),
+    (03212017, 1947),
+    (06302018, 0923),
+    (06302018, 0927),
+    (08062018, 1133),
+    (09242018, 1027),
+    (07012018, 1234),
+    (07012018, 1423),
+    (02252018, 1826),
+    (06232018, 2236)
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableNetwork() {
@@ -111,9 +141,14 @@ function createTableNetwork() {
 // TODO
 function insertNetwork() {
   const sql =`
-  
+    INSERT INTO Network VALUES
+      ('FoodNetwork', 10, 'Cooking classes and more', 'food@network.com'),
+      ('StudentNetwork', 5, 'Tips for student life, studying, and more', 'student@network.com'),
+      ('WallStreetNetwork', 25, 'All the latest on stocks, business, and finance', 'wallstreet@network.com'),
+      ('ZBOXNetwork', 35, 'Watch your favorite gamers', 'zbox@network.com'),
+      ('MusicNetwork', 10, 'Listen to your favorite music', 'music@network.com')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableTubeUser() {
@@ -137,6 +172,8 @@ function insertTubeUser() {
   const sql = `
     INSERT INTO TubeUser VALUES
       ('julez', 'Im sparkling', 'Julie Jones', 'julez@jjmail.com', '123 Bloor St', 'A1B2C3'),
+      ('jennyyy', 'Live, Love, Laugh', 'Jenny Chamberlain', 'unicorn12@umail.com', '475 Angel Dr', 'A1B2C3'),
+      ('halofiend', 'Gamerz for life', 'David West', 'halo71@umail.com', '9004 West 9th Ave', 'A1B2C3'),
       ('choo', 'Fun times', 'Chris Kross', 'chrisk@umail.com', '554 Broadway St', 'V1N2K5')
     ;`;
   return db.any(sql);
@@ -159,9 +196,12 @@ function createTablePlaylistCreates() {
 // TODO
 function insertPlaylistCreates() {
   const sql =`
-  
+    INSERT INTO Playlist_Creates VALUES
+      ('ChillTunes', 'music to relax to', 'julez'),
+      ('DanceParty', 'lets get pumped', 'julez'),
+      ('StudyTunes', 'music for studying to', 'choo')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableFollows() {
@@ -184,9 +224,13 @@ function createTableFollows() {
 // TODO
 function insertFollows() {
   const sql =`
-  
+    INSERT INTO Follows VALUES
+      ('julez', 'choo'),
+      ('choo', 'julez'),
+      ('choo', 'halofiend'),
+      ('julez', 'jennyyy')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableChannelOwnsBelongsTo() {
@@ -210,9 +254,15 @@ function createTableChannelOwnsBelongsTo() {
 // TODO
 function insertChannelOwnsBelongsTo() {
   const sql =`
-  
+    INSERT INTO Channel_Owns_BelongsTo VALUES
+      ('WeekendFun', 'Snaps from my weekend!', 'julez', NULL),
+      ('MusicStuff', 'Music of my life', 'julez', 'MusicNetwork'),
+      ('Music', 'Songs to dance around to', 'choo', 'MusicNetwork'),
+      ('MusicalTunes', 'Just a bunch of songs I listen to', 'halofiend', 'MusicNetwork'),
+      ('MomsMeals', 'Recipes from the kitchen of a mother', 'jennyyy', 'FoodNetwork'),
+      ('SickSnaps', 'Game clips of my sick skills', 'halofiend', 'ZBOXNetwork')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableSubscribe() {
@@ -235,8 +285,12 @@ function createTableSubscribe() {
 // TODO
 function insertSubscribe() {
   const sql =`
+    INSERT INTO Subscribe VALUES
+      ('julez', 'MomsMeals', TRUE),
+      ('choo', 'SickSnaps', FALSE),
+      ('choo', 'WeekendFun', TRUE)
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableVideoPostedAtContains() {
@@ -264,9 +318,28 @@ function createTableVideoPostedAtContains() {
 // TODO
 function insertVideoPostedAtContains() {
   const sql =`
-  
+    INSERT INTO Video_PostedAt_Contains VALUES
+      (1, 'hanging out at the beach', 'Beach Fun!', 230, 'WeekendFun', 06272018, 2318, 'MapleLeaf'),
+      (2, 'supper with my girls', 'BBQ Hut', 118, 'WeekendFun', 06282018, 0023, 'MapleLeaf'),
+      (3, 'club life foreverrrr', 'Dancing at QTs', 123, 'WeekendFun', 06282018, 0027, 'MapleLeaf'),
+      (4, 'chicken in a white sauce with veggies', 'chicken a la king', 1210, 'MomsMeals', 02222018, 1312, 'EastCoast'),
+      (5, 'Smooth chocolate mousse without flour', 'Gluten Free Chocolate Cake', 1023, 'MomsMeals', 02232018, 1426, 'EastCoast'),
+      (6, 'Snipes for dayyyyys in multiplayer', 'Sniping fools', 134, 'SickSnaps', 03142017, 2201, 'WestCoast'),
+      (7, 'Explosions on Falsity', 'Merqed those noobs', 156, 'SickSnaps', 03212017, 1947, 'WestCoast'),
+      (8, 'super chill dance music by DJ Sych', 'ClubLife Vol3', 335, 'MusicStuff', 06302018, 0923, 'MapleLeaf'),
+      (9, 'super duper chill dance music by DJ James', 'ClubLife Vol2', 329, 'MusicStuff', 06302018, 0927, 'MapleLeaf'),
+      (10, 'dance tunes by DJ Merc', 'ClubLife Vol4', 553, 'MusicStuff', 08062018, 1133, 'MapleLeaf'),
+      (11, 'crazy club set', 'DJ James Live', 425, 'MusicStuff', 09242018, 1027, 'MapleLeaf'),
+      (12, 'classical jazz music by the best', 'Jazz Life', 501, 'MusicalTunes', 06302018, 0923, 'EastCoast'),
+      (13, 'classical piano with no lyrics', 'Scales and More', 554, 'MusicalTunes', 06302018, 0927, 'EastCoast'),
+      (14, 'violins, cellos, and more', 'Strings', 329, 'MusicalTunes', 08062018, 1133, 'EastCoast'),
+      (15, 'piano concert that happened near me', 'Beautiful Piano', 444, 'MusicalTunes', 09242018, 1027, 'EastCoast'),
+      (16, 'the best music for relaxing to', 'Chill tune time', 335, 'Music', 06302018, 0923, 'WestCoast'),
+      (17, 'the hippest beats ever', 'Bounce Beats', 329, 'Music', 06302018, 0927, 'WestCoast'),
+      (18, 'dance music beats', 'Dance life', 553, 'Music', 08062018, 1133, 'WestCoast'),
+      (19, 'sleepytime songs', 'Relaxing Sleep Songs', 425, 'Music', 09242018, 1027, 'WestCoast')
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableMonetized() {
@@ -286,9 +359,12 @@ function createTableMonetized() {
 // TODO
 function insertMonetized() {
   const sql =`
-  
+    INSERT INTO Monetized VALUES
+      (4, 100, 10),
+      (5, 100, 10),
+      (6, 80, 5)
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTablePartOf() {
@@ -298,7 +374,7 @@ function createTablePartOf() {
       uName			  VARCHAR(40),
       vID			    INTEGER,
       PRIMARY KEY (pName, uName, vID),
-      FOREIGN KEY (pName, uName) REFERENCES Playlist_Creates
+      FOREIGN KEY (uName, pName) REFERENCES Playlist_Creates
         ON DELETE CASCADE
         ON UPDATE CASCADE,
       FOREIGN KEY (uName) REFERENCES TubeUser
@@ -314,9 +390,21 @@ function createTablePartOf() {
 // TODO
 function insertPartOf() {
   const sql =`
-  
+    INSERT INTO PartOf VALUES
+      ('ChillTunes', 'julez', 8),
+      ('ChillTunes', 'julez', 9),
+      ('ChillTunes', 'julez', 16),
+      ('ChillTunes', 'julez', 19),
+      ('DanceParty', 'julez', 8),
+      ('DanceParty', 'julez', 10),
+      ('DanceParty', 'julez', 11),
+      ('DanceParty', 'julez', 17),
+      ('DanceParty', 'julez', 18),
+      ('StudyTunes', 'choo', 12),
+      ('StudyTunes', 'choo', 13),
+      ('StudyTunes', 'choo', 14)
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 function createTableClassified() {
@@ -338,9 +426,23 @@ function createTableClassified() {
 // TODO
 function insertClassified() {
   const sql =`
-  
-  `;
-  //return db.any(sql);
+    INSERT INTO Classified VALUES
+      (11, 'Music'),
+      (1, 'Adventure'),
+      (12, 'Music'),
+      (6, 'Adventure'),
+      (7, 'Adventure'),
+      (13, 'Music'),
+      (3, 'Adventure'),
+      (15, 'Music'),
+      (2, 'GlutenFree'),
+      (2, 'Desserts'),
+      (4, 'Cooking'),
+      (5, 'Cooking'),
+      (5, 'GlutenFree'),
+      (5, 'Desserts')
+  ;`;
+  return db.any(sql);
 }
 
 function createTableCommentWrites() {
@@ -369,9 +471,13 @@ function createTableCommentWrites() {
 // TODO
 function insertCommentWrites() {
   const sql =`
-  
+    INSERT INTO Comment_Writes VALUES
+      (1, 'Looks like so much fun honey!', 07012018, 1234, 'jennyyy', 1),
+      (2, 'Wish I could have been there', 07012018, 1423, 'choo', 1),
+      (3, 'This looks so delicious, I want to eat it NOW', 02252018, 1826, 'julez', 5),
+      (4, 'So sick dude', 06232018, 2236, 'choo', 7)
   `;
-  //return db.any(sql);
+  return db.any(sql);
 }
 
 module.exports = function createData() {
@@ -396,7 +502,7 @@ module.exports = function createData() {
     .then(createTablePartOf)
     .then(createTableClassified)
     .then(createTableCommentWrites)
-    
+
     // insert data with no foreign key references
     .then(insertPostalCode)
     .then(insertCategory)
