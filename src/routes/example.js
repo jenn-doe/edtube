@@ -61,7 +61,7 @@ router.post('/', (req, res, next) => {
           .then(getDataAndRender(res))
           .catch((err) => console.log(err));
       break;
-      case "insertUser" : insertNewUser(req.body.uName, req.body.bio, req.body.name, req.body.email,
+      case "insert-user" : insertNewUser(req.body.uName, req.body.bio, req.body.name, req.body.email,
           req.body.address, req.body.postalCode)
           .then(getDataAndRender(res))
           .catch((err) => console.log(err));

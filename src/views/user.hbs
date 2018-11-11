@@ -47,7 +47,7 @@
     <h1>Welcome To Eddy Tube</h1>
     <h2>Users</h2>
     {{!-- add a user --}}
-    <form method="POST" action="/users">
+    <form method="POST" action="/user">
       <p>Add new user</p>
       <div class="tubeinput">
         <input class="form-control" type="text" name="input-username" placeholder="Username (required)">
@@ -60,7 +60,7 @@
       </div>
     </form>
     {{!-- delete a user's videos --}}
-    <form method="POST" action="/users">
+    <form method="POST" action="/user">
       <p>Delete a user's videos</p>
       <div class="tubeinput">
         <input class="form-control" type="text" name="input-username" placeholder="Username">
@@ -68,7 +68,7 @@
       </div>
     </form>
     {{!-- update a user's biography --}}
-    <form method="POST" action="/users">
+    <form method="POST" action="/user">
       <p>Update a user's biography</p>
       <div class="tubeinput">
         <input class="form-control" type="text" name="input-username" placeholder="Username">
@@ -77,7 +77,7 @@
       </div>
     </form>
     {{!-- get all videos that belong to a user's channel --}}
-    <form method="POST" action="/users">
+    <form method="POST" action="/user">
       <p>List all videos on a channel</p>
       <div class="tubeinput">
         <input class="form-control" type="text" name="input-cname" placeholder="Channel name">
@@ -85,7 +85,7 @@
       </div>
     </form>
     {{!-- get all users a user follows (follower list) --}}
-    <form method="POST" action="/users">
+    <form method="POST" action="/user">
       <p>List a user's following</p>
       <div class="tubeinput">
         <input class="form-control" type="text" name="input-username" placeholder="Username">
