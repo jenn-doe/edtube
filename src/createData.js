@@ -173,7 +173,7 @@ function insertTubeUser() {
     INSERT INTO TubeUser VALUES
       ('julez', 'Im sparkling', 'Julie Jones', 'julez@jjmail.com', '123 Bloor St', 'A1B2C3'),
       ('jennyyy', 'Live, Love, Laugh', 'Jenny Chamberlain', 'unicorn12@umail.com', '475 Angel Dr', 'A1B2C3'),
-      ('halofiend', 'Gamerz for life', 'David West', 'halo71@umail.com', '9004 West 9th Ave', 'A1B2C3'),
+      ('halofiend', 'Gamerz for life', 'David West', 'halo71@umail.com', '9004 West 9th Ave', 'V1N2K5'),
       ('choo', 'Fun times', 'Chris Kross', 'chrisk@umail.com', '554 Broadway St', 'V1N2K5')
     ;`;
   return db.any(sql);
