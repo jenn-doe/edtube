@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>EdTube - Users</title>
+  <link rel="stylesheet" type="text/css" href="../sass/style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="nav">
+    <ul class="nav-list">
+      <span class="nav-left">
+        <li class="nav-burger">
+          <div class="nav-burger--line"></div>
+          <div class="nav-burger--line"></div>
+          <div class="nav-burger--line"></div>
+        </li>
+        <li class="nav-logo">
+          <img class="nav-logo--img" src="/et_logo.png">
+        </li>
+        <li>
+          <input class="nav-searchbox" type="text" name="search" />
+          <button class="nav-searchbutton" type="submit"><i class="fa fa-search nav-searchbutton--icon"></i></button>
+        </li>
+      </span>
+      <span class="nav-right">
+        <li><i class="fas fa-video-plus"></i></li>
+        <li><i class="fas fa-th"></i></li>
+        <li><i class="fas fa-comment"></i></li>
+        <li><i class="fas fa-bell"></i></li>
+      </span>
+    </ul>
+  </div>
+  <div class="main">
+    <h1>Welcome To Eddy Tube</h1>
+    <h2>Users</h2>
+    <ul>
+      {{#each users}}
+      <li>{{uname}}, {{name}}, {{biography}}, {{email}}, {{address}}, {{postalcode}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+</html>
