@@ -96,6 +96,13 @@
           <input id="user-followers" class="form-control btn btn-info" type="submit" value="Get followers" name="get-followers"></p>
         </div>
       </form>
+      {{!-- get users who follow all other users --}}
+      <form method="POST" action="/user">
+        <p>Get user(s) who follow all other users</p>
+          <div class="tubeinput">
+            <input id="user-creepy-followers" class="form-control btn btn-info" type="submit" value="Get followers" name="get-creepy-followers"></p>
+          </div>
+      </form>
     </div>
 
     {{!-- results table --}}
