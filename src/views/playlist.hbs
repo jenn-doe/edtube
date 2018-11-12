@@ -52,8 +52,9 @@
         <p>Get number of videos from different channels in a playlist</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
+          <input class="form-control" type="text" name="input-uname" placeholder="Creator">
           <input id="playlists-channels" class="form-control btn btn-info" type="submit" value="Get number of videos"
-            name="insert-user"></p>
+            name="get-num-vids-per-channel-in-playlist"></p>
         </div>
       </form>
       {{!-- get all videos from a playlist --}}
@@ -61,7 +62,8 @@
         <p>Get all videos from a playlist</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
-          <input id="playlist-getall" class="form-control btn btn-info" type="submit" value="Get videos" name="delete-user-vids"></p>
+          <input class="form-control" type="text" name="input-uname" placeholder="Creator">
+          <input id="playlist-getall" class="form-control btn btn-info" type="submit" value="Get videos" name="get-vids-from-playlist"></p>
         </div>
       </form>
       {{!-- delete a playlist --}}
@@ -69,7 +71,8 @@
         <p>Delete a playlist</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-pname" placeholder="Playlist name">
-          <input id="playlist-delete" class="form-control btn btn-danger" type="submit" value="Delete playlist" name="delete-user-vids"></p>
+          <input class="form-control" type="text" name="input-uname" placeholder="Creator">
+          <input id="playlist-delete" class="form-control btn btn-danger" type="submit" value="Delete playlist" name="delete-playlist"></p>
         </div>
       </form>
     </div>
@@ -79,6 +82,7 @@
         Refresh results
       </a>
       {{!-- complete playlists table --}}
+      {{#if allPlaylists}}
       <table class="results-table">
         <thead>
           <tr>
@@ -88,7 +92,7 @@
           </tr>
         </thead>
         <tbody>
-          {{#each playlists}}
+          {{#each allPlaylists}}
           <tr>
             <td>{{pname}}</td>
             <td>{{description}}</td>
@@ -97,6 +101,47 @@
           {{/each}}
         </tbody>
       </table>
+      {{/if}}
+
+      {{#if numPerChan}}
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Number Videos</th>
+            <th>Channel Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each numPerChan}}
+          <tr>
+            <td>{{count}}</td>
+            <td>{{cname}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
+
+      {{#if vidsInPlaylist}}
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Video ID</th>
+            <th>Description</th>
+            <th>Playtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each vidsInPlaylist}}
+          <tr>
+            <td>{{vid}}</td>
+            <td>{{description}}</td>
+            <td>{{playtime}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
 
       {{!-- <ul>
         {{#each playlists}}
