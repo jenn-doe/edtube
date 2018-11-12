@@ -30,19 +30,10 @@ function getNumVideosPerChannel(pName, uName) {
   return db.any(playlistToGetChannelsFor);
 }
 
-function getDataAndRender(res) {
-  Promise.all([getPlaylist()])
-    .then(([playlists]) => {
-      res.render('playlist', {
-        playlists: playlists,
-      });
-  });
-}
-
 router.get('/', (req, res, next) => {
   console.log('GET playlist');
   getPlaylist()
-    .then(([allPlaylists]) => {
+    .then(allPlaylists => {
       res.render('playlist', {
         numPerChan: null,
         vidsInPlaylist: null,
