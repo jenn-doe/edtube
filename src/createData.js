@@ -18,7 +18,7 @@ function dropTables() {
       Storage,
       Category,
       PostalCode
-    ;`;
+    CASCADE;`;
   return db.any(sql);
 }
 
@@ -430,7 +430,6 @@ function insertClassified() {
       (11, 'Music'),
       (1, 'Adventure'),
       (12, 'Music'),
-      (6, 'Adventure'),
       (7, 'Adventure'),
       (13, 'Music'),
       (3, 'Adventure'),

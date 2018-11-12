@@ -52,7 +52,7 @@
         <p>Get channels by postal code</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
-          <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Get channels" name="insert-user"></p>
+          <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Get channels" name="get-channels"></p>
         </div>
       </form>
       {{!-- get category with most videos --}}
@@ -70,27 +70,30 @@
       </a>
       {{!-- table for channels by postal code --}}
       {{!-- channel name, description, username --}}
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Channel Name</th>
-            <th>Description</th>
-            <th>Creator</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each channels}}
-          <tr>
-            <td>{{cname}}</td>
-            <td>{{description}}</td>
-            <td>{{uname}}</td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
+      {{#if channels}}
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Channel Name</th>
+              <th>Description</th>
+              <th>Creator</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each channels}}
+            <tr>
+              <td>{{cname}}</td>
+              <td>{{description}}</td>
+              <td>{{uname}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
 
       {{!-- table for category with most videos --}}
       {{!-- category name, description, numvideos --}}
+      {{#if topcat}}
       <table class="results-table">
         <thead>
           <tr>
@@ -101,12 +104,15 @@
         </thead>
         <tbody>
           <tr>
+            {{#each topcat}}
             <td>{{catname}}</td>
             <td>{{description}}</td>
-            <td>{{numvideos}}</td>
+            <td>{{count}}</td>
+            {{/each}}
           </tr>
         </tbody>
       </table>
+      {{/if}}
     </div>
   </div>
 </body>
