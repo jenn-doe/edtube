@@ -71,13 +71,14 @@ router.post('/', (req, res, next) => {
     break;
     case "delete-playlist" :
       deletePlaylist(req.body["input-pname"], req.body["input-uname"])
-            .then(allPlaylists => {
-              res.render('playlist', {
-                numPerChan: null,
-                vidsInPlaylist: null,
-                allPlaylists: allPlaylists
-              })})
-            .catch((err) => console.log(err));
+        .then(getPlaylist)
+          .then(allPlaylists => {
+            res.render('playlist', {
+              numPerChan: null,
+              vidsInPlaylist: null,
+              allPlaylists: allPlaylists
+            })})
+          .catch((err) => console.log(err));
     break;
   }
 

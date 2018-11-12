@@ -100,6 +100,8 @@
       <a href="/user" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
         Refresh results
       </a>
+      {{#if users}}
+      <h2>Users</h2>
       <table class="results-table">
         <thead>
           <tr>
@@ -124,17 +126,22 @@
           {{/each}}
         </tbody>
       </table>
+      {{/if}}
 
+      {{#if videos}}
+      <h2>Videos</h2>
       <table class="results-table">
         <thead>
           <tr>
             <th>VID</th>
             <th>Description</th>
             <th>Name</th>
+            <th>User</th>
             <th>Play Time</th>
             <th>Channel Name</th>
             <th>Date Posted</th>
             <th>Time Posted</th>
+            <th>Storage Server</th>
           </tr>
         </thead>
         <tbody>
@@ -143,6 +150,7 @@
             <td>{{vid}}</td>
             <td>{{description}}</td>
             <td>{{vname}}</td>
+            <td>{{uname}}</td>
             <td>{{playtime}}</td>
             <td>{{cname}}</td>
             <td>{{date}}</td>
@@ -152,6 +160,7 @@
           {{/each}}
         </tbody>
       </table>
+      {{/if}}
     </div>
   </div>
 </body>
