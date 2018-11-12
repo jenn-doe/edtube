@@ -5,6 +5,7 @@ const example = require("./routes/example");
 const user = require("./routes/user");
 const playlist = require("./routes/playlist");
 const trending = require("./routes/trending");
+const myChannels = require("./routes/myChannels");
 const exphbs = require("express-handlebars");
 const sassMiddleware = require("node-sass-middleware");
 const createData = require("./createData");
@@ -35,6 +36,7 @@ app.use("/example", example);
 app.use("/user", user);
 app.use("/playlist", playlist);
 app.use("/trending", trending);
+app.use("/myChannels", myChannels);
 
 createData();
 

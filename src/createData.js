@@ -479,6 +479,16 @@ function insertCommentWrites() {
   return db.any(sql);
 }
 
+function createView() {
+  const sql =`
+    CREATE VIEW JulezChannels AS 
+    SELECT   c.cname, c.description
+    FROM     Channel_Owns_BelongsTo c
+    WHERE    c.uName = 'julez'
+    ;`;
+  return db.any(sql);
+}
+
 module.exports = function createData() {
   dropTables()
     // tables with no foreign key references
@@ -522,5 +532,6 @@ module.exports = function createData() {
     .then(insertPartOf)
     .then(insertClassified)
     .then(insertCommentWrites)
+    .then(createView)
     .catch((err) => console.log(err));
 }
