@@ -37,7 +37,8 @@ function insertPostalCode() {
   const sql = `
     INSERT INTO PostalCode VALUES
       ('A1B2C3', 'Toronto', 'Ontario'),
-      ('V1N2K5', 'Vancouver', 'British Columbia')
+      ('V1N2K5', 'Vancouver', 'British Columbia'),
+      ('K1J1B7', 'Gloucester', 'Ontario')
     ;`;
   return db.any(sql);
 }
@@ -174,7 +175,8 @@ function insertTubeUser() {
       ('julez', 'Im sparkling', 'Julie Jones', 'julez@jjmail.com', '123 Bloor St', 'A1B2C3'),
       ('jennyyy', 'Live, Love, Laugh', 'Jenny Chamberlain', 'unicorn12@umail.com', '475 Angel Dr', 'A1B2C3'),
       ('halofiend', 'Gamerz for life', 'David West', 'halo71@umail.com', '9004 West 9th Ave', 'V1N2K5'),
-      ('choo', 'Fun times', 'Chris Kross', 'chrisk@umail.com', '554 Broadway St', 'V1N2K5')
+      ('choo', 'Fun times', 'Chris Kross', 'chrisk@umail.com', '554 Broadway St', 'V1N2K5'),
+      ('Snoopy McSnooperson', 'ICU', 'David Vigneault', 'boss@csis.ca', '1941 Ogilvie Rd', 'K1J1B7')
     ;`;
   return db.any(sql);
 }
@@ -228,7 +230,11 @@ function insertFollows() {
       ('julez', 'choo'),
       ('choo', 'julez'),
       ('choo', 'halofiend'),
-      ('julez', 'jennyyy')
+      ('julez', 'jennyyy'),
+      ('Snoopy McSnooperson', 'julez'),
+      ('Snoopy McSnooperson', 'jennyyy'),
+      ('Snoopy McSnooperson', 'halofiend'),
+      ('Snoopy McSnooperson', 'choo')
   `;
   return db.any(sql);
 }
