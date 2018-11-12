@@ -4,8 +4,18 @@ const db = require('../db');
 let router = express.Router();
 
 function getUsers() {
-  var getUsers = `SELECT * FROM TubeUser`;
+  var getUsers = `SELECT * FROM TubeUser;`;
   return db.any(getUsers);
+}
+
+function getVideos() {
+  var getVideos = `
+    SELECT *
+    FROM   TubeUser u, Channel_Owns_BelongsTo c, Video_PostedAt_Contains v
+    WHERE  u.uName = c.uName
+    AND    c.cName = v.cName
+    ;`;
+  return db.any(getVideos);
 }
 
 function insertNewUser(uName, bio, name, email, address, postalCode) {
@@ -29,36 +39,26 @@ function deleteUserVideos(uName) {
     return db.any(deleteUserVideos);
 }
 
-// function viewUserVideos(uName) {
-//     var viewUserVideos = `CREATE OR REPLACE VIEW videos AS
-//     SELECT * FROM Video_PostedAt_Contains
-//     WHERE cName IN (SELECT cName FROM Channel_Owns_BelongsTo
-//                     WHERE uName = '${uName}');`;
-//     return db.any(viewUserVideos);
-// }
-
-function getDataAndRender(res) {
-  Promise.all([getUsers()])
-    .then(([users]) => {
-      res.render('user', {
-        users: users,
-          videos: null
-      });
-  });
+function getUserVideos(uName) {
+    var sql = `
+    SELECT *
+    FROM   TubeUser u, Channel_Owns_BelongsTo c, Video_PostedAt_Contains v
+    WHERE  u.uName = c.uName
+    AND    c.cName = v.cName
+    AND    u.uName = '${uName}'
+    ;`;
+    return db.any(sql);
 }
-
-// function getDataAndRenderVideos(res) {
-//     Promise.all([getVidoes()])
-//         .then(([videos]) => {
-//             res.render('videos', {
-//                 users: videos
-//             });
-//         });
-// }
 
 router.get('/', (req, res, next) => {
   console.log('GET user');
-  getDataAndRender(res);
+  getUsers()
+    .then(users => {
+      res.render('user', {
+        users: users,
+        videos: null
+    });
+  });
 });
 
 router.post('/', (req, res, next) => {
@@ -83,15 +83,26 @@ router.post('/', (req, res, next) => {
                 res.render('user', {
                     users: users,
                     videos: null
-                })});
+                })
+              });
     break;
     case "delete-user-vids" : deleteUserVideos(req.body["input-username"])
-        .then();
+        .then(getVideos)
+        .then(videos => {
+            res.render('user', {
+                users: null,
+                videos: videos
+            })
+          });
     break;
-      // case "get-videos-user" : viewUserVideos(req.body["input-username"])
-      //     .then(getDataAndRender(res))
-      //     .catch((err) => console.log(err));
-      // break;
+    case "get-videos-user" : getUserVideos(req.body["input-username"])
+        .then(videos => {
+          res.render('user', {
+            users: null,
+            videos: videos
+          })
+        });
+    break;
   }
 });
 
