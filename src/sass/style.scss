@@ -51,6 +51,7 @@ body {
         flex-direction: row;
         flex-wrap: wrap;
         a {
+          color: black;
           background-color: inherit;
           border: none;
           outline: none;
@@ -63,7 +64,7 @@ body {
           background-color: #ddd;
           // border-bottom: 1px solid black;
           text-decoration: underline;
-          text-decoration-color: grey;
+          text-decoration-color: black;
         }
         a .active {
           background-color: #ccc;
@@ -88,14 +89,17 @@ body {
     margin: 15px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
 
     .results-section {
       margin-left: 3em;
-      margin-top: 10em;
-      margin: 10em 0 3em 3em;
       display: flex;
       flex-direction: column;
+      align-items: center;
+
+      .refresh {
+        width: 100%;
+      }
 
       .results-table {
         border-collapse: collapse;

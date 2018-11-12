@@ -48,7 +48,7 @@
       <h1>Welcome To Eddy Tube</h1>
       <h2>Trending</h2>
       {{!-- find channels by postal code --}}
-      <form method="POST" action="/users">
+      <form method="POST" action="/trending">
         <p>List channels by postal code</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
@@ -56,7 +56,7 @@
         </div>
       </form>
       {{!-- get category with most videos --}}
-      <form method="POST" action="/users">
+      <form method="POST" action="/trending">
         <p>Get category with most videos</p>
         <div class="tubeinput">
           <input id="trending-category" class="form-control btn btn-danger" type="submit" value="Get category" name="get-category"></p>
@@ -65,6 +65,9 @@
     </div>
 
     <div class="results-section">
+      <a href="/trending" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
+        Refresh results
+      </a>
       {{!-- table for channels by postal code --}}
       {{!-- channel name, description, username --}}
       <table class="results-table">
