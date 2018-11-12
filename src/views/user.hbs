@@ -131,6 +131,24 @@
       </table>
       {{/if}}
 
+        {{#if followers}}
+            <h2>Followers</h2>
+            <table class="results-table">
+                <thead>
+                <tr>
+                    <th>User Names</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each followers}}
+                    <tr>
+                        <td>{{follower_uname}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+
       {{#if videos}}
       <h2>Videos</h2>
       <table class="results-table">

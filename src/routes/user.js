@@ -39,6 +39,15 @@ function deleteUserVideos(uName) {
     return db.any(deleteUserVideos);
 }
 
+function getFolowers(uName) {
+    var sql = `
+    SELECT follower_uName
+    FROM   Follows
+    WHERE  followed_uName = '${uName}'
+    ;`;
+    return db.any(sql);
+}
+
 function getUserVideos(uName) {
     var sql = `
     SELECT *
@@ -56,7 +65,8 @@ router.get('/', (req, res, next) => {
     .then(users => {
       res.render('user', {
         users: users,
-        videos: null
+        videos: null,
+        followers: null
     });
   });
 });
@@ -74,7 +84,8 @@ router.post('/', (req, res, next) => {
             .then(users => {
                 res.render('user', {
                     users: users,
-                    videos: null
+                    videos: null,
+                    followers: null
                 })});
     break;
     case "update-bio" : updateBiography(req.body["input-username"], req.body["input-bio"])
@@ -82,7 +93,8 @@ router.post('/', (req, res, next) => {
             .then(users => {
                 res.render('user', {
                     users: users,
-                    videos: null
+                    videos: null,
+                    followers: null
                 })
               });
     break;
@@ -91,7 +103,8 @@ router.post('/', (req, res, next) => {
         .then(videos => {
             res.render('user', {
                 users: null,
-                videos: videos
+                videos: videos,
+                followers: null
             })
           });
     break;
@@ -99,10 +112,20 @@ router.post('/', (req, res, next) => {
         .then(videos => {
           res.render('user', {
             users: null,
-            videos: videos
+            videos: videos,
+            followers: null
           })
         });
     break;
+      case "get-followers" : getFolowers(req.body["input-username"])
+          .then(followers => {
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: followers
+              })
+          });
+
   }
 });
 
