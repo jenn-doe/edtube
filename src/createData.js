@@ -234,7 +234,8 @@ function insertFollows() {
       ('Snoopy McSnooperson', 'julez'),
       ('Snoopy McSnooperson', 'jennyyy'),
       ('Snoopy McSnooperson', 'halofiend'),
-      ('Snoopy McSnooperson', 'choo')
+      ('Snoopy McSnooperson', 'choo'),
+      ('Snoopy McSnooperson', 'Snoopy McSnooperson')
   `;
   return db.any(sql);
 }
