@@ -5,6 +5,7 @@ $color-almost-black: #282828;
 $color-grey: grey;
 $color-light-grey: #ddd;
 $icon-size: 16px;
+$l-spacing: 1px;
 
 body {
   font: 14px $font-stack;
@@ -49,7 +50,11 @@ body {
       .navlinks {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+
+        :last-child {
+          min-width: 132px;
+        }
+
         a {
           color: black;
           background-color: inherit;
@@ -89,9 +94,18 @@ body {
     margin: 15px;
     display: flex;
     flex-direction: row;
-    // flex-wrap: wrap;
+
+    h1 {
+      letter-spacing: $l-spacing;
+      margin-top: -6px;
+    }
+
+    #myChannels {
+      margin-left: 1em;
+    }
 
     .results-section {
+      margin-top: 20px;
       margin-left: 3em;
       display: flex;
       flex-direction: column;
@@ -121,13 +135,25 @@ body {
     }
   }
 
+  .showall {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+  }
+
   // bootstrap overrides
   .form-control {
     margin: 3px;
     max-width: 250px;
   }
 
-  .btn-danger {
-    background-color: $color-red;
+  .btn {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: $l-spacing;
+
+    .btn-danger {
+      background-color: $color-red;
+    }
   }
 }

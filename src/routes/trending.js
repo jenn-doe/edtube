@@ -1,13 +1,16 @@
-const express = require('express');
-const db = require('../db');
+const express = require("express");
+const db = require("../db");
 
 let router = express.Router();
 
-router.get('/', (req, res, next) => {
-  console.log('GET trending');
-  res.render('trending', {
-    channels: null,
-    topcat: null
+router.get("/", (req, res, next) => {
+  console.log("GET trending");
+  getAllChannels().then(allchannels => {
+    res.render("trending", {
+      channels: null,
+      topcat: null,
+      allchannels: allchannels
+    });
   });
 });
 
@@ -36,32 +39,52 @@ function getTopCategory() {
   WHERE  tc.count IN (
       SELECT MAX(COUNT) FROM TopCategories
   );
-  `
+  `;
   return db.any(sql);
 }
 
-router.post('/', (req, res, next) => {
-  console.log('POST trending');
+function getAllChannels() {
+  const sql = `
+  SELECT c.cName, c.description, u.uName
+  FROM   TubeUser u, Channel_Owns_BelongsTo c
+  WHERE  u.uName = c.uName;
+  `;
+  return db.any(sql);
+}
+
+router.post("/", (req, res, next) => {
+  console.log("POST trending");
   let html_keys = Object.keys(req.body);
+  console.log(html_keys);
   let operation = html_keys[html_keys.length - 1];
 
   switch (operation) {
-    case "get-channels" : 
-      getChannelsFromPostalCode(req.body["input-postalcode"])
-        .then(channels => {
-          res.render('trending', {
-            channels: channels,
-            topcat: null
-          })});
-      break;
-    case "get-category" :
-      getTopCategory()
-        .then(topcat => {
-          res.render('trending', {
-            channels: null,
-            topcat: topcat
-          });
+    case "get-channels":
+      getChannelsFromPostalCode(req.body["input-postalcode"]).then(channels => {
+        res.render("trending", {
+          channels: channels,
+          topcat: null,
+          allchannels: null
         });
+      });
+      break;
+    case "get-category":
+      getTopCategory().then(topcat => {
+        res.render("trending", {
+          channels: null,
+          topcat: topcat,
+          allchannels: null
+        });
+      });
+      break;
+    case "get-all-channels":
+      getAllChannels().then(allchannels => {
+        res.render("trending", {
+          channels: null,
+          topcat: null,
+          allchannels: allchannels
+        });
+      });
       break;
   }
 });

@@ -34,7 +34,7 @@
             <a class="navlink" id="trendinglink" href="trending">Trending</a>
           </li>
           <li>
-            <a class="navlink" id="trendinglink" href="myChannels">My Channels</a>
+            <a class="navlink" id="channelslink" href="myChannels">My Channels</a>
           </li>
         </span>
       </span>
@@ -48,50 +48,51 @@
   </div>
   <div class="main">
     <div class="input-section">
-      <h1>Welcome To Eddy Tube</h1>
-      <h2>Trending</h2>
+      <h1>Trending</h1>
       {{!-- find channels by postal code --}}
       <form method="POST" action="/trending">
         <p>Get channels by postal code</p>
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
-          <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Get channels" name="get-channels"></p>
+          <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Get channels" name="get-channels">
         </div>
       </form>
       {{!-- get category with most videos --}}
       <form method="POST" action="/trending">
         <p>Get category with most videos</p>
         <div class="tubeinput">
-          <input id="trending-category" class="form-control btn btn-danger" type="submit" value="Get category" name="get-category"></p>
+          <input id="trending-category" class="form-control btn btn-danger" type="submit" value="Get category" name="get-category">
         </div>
       </form>
     </div>
 
     <div class="results-section">
-      <a href="/trending" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
-        Refresh results
-      </a>
+      <div class="showall">
+        <a href="/trending" class="form-control btn btn-success refresh" type="submit" value="Get all channels" name="get-all-channels">
+          Show all channels
+        </a>
+      </div>
       {{!-- table for channels by postal code --}}
       {{!-- channel name, description, username --}}
       {{#if channels}}
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Channel Name</th>
-              <th>Description</th>
-              <th>Creator</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each channels}}
-            <tr>
-              <td>{{cname}}</td>
-              <td>{{description}}</td>
-              <td>{{uname}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Channel Name</th>
+            <th>Description</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each channels}}
+          <tr>
+            <td>{{cname}}</td>
+            <td>{{description}}</td>
+            <td>{{uname}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
       {{/if}}
 
       {{!-- table for category with most videos --}}
@@ -113,6 +114,29 @@
             <td>{{count}}</td>
             {{/each}}
           </tr>
+        </tbody>
+      </table>
+      {{/if}}
+
+      {{!-- table for all channels --}}
+      {{!-- category name, description, numvideos --}}
+      {{#if allchannels}}
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Channel Name</th>
+            <th>Description</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each allchannels}}
+          <tr>
+            <td>{{cname}}</td>
+            <td>{{description}}</td>
+            <td>{{uname}}</td>
+          </tr>
+          {{/each}}
         </tbody>
       </table>
       {{/if}}

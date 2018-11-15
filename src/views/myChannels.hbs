@@ -34,7 +34,7 @@
             <a class="navlink" id="trendinglink" href="trending">Trending</a>
           </li>
           <li>
-            <a class="navlink" id="trendinglink" href="myChannels">My Channels</a>
+            <a class="navlink" id="channelslink" href="myChannels">My Channels</a>
           </li>
         </span>
       </span>
@@ -48,32 +48,25 @@
   </div>
   <div class="main">
     <div class="input-section">
-      <h1>Welcome To Eddy Tube</h1>
-      <h2>My Channels</h2>
-    </div>
-
-    <div class="results-section">
-      <a href="/mychannels" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
-        Refresh results
-      </a>
-      {{!-- complete playlists table --}}
-      <table class="results-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each channels}}
-          <tr>
-            <td>{{cname}}</td>
-            <td>{{description}}</td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
-
+      <h1 id="myChannels">My Channels</h1>
+      <div class="results-section">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each channels}}
+            <tr>
+              <td>{{cname}}</td>
+              <td>{{description}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>

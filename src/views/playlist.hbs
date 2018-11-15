@@ -34,7 +34,7 @@
             <a class="navlink" id="trendinglink" href="trending">Trending</a>
           </li>
           <li>
-            <a class="navlink" id="trendinglink" href="myChannels">My Channels</a>
+            <a class="navlink" id="channelslink" href="myChannels">My Channels</a>
           </li>
         </span>
       </span>
@@ -48,8 +48,7 @@
   </div>
   <div class="main">
     <div class="input-section">
-      <h1>Welcome To Eddy Tube</h1>
-      <h2>Playlists</h2>
+      <h1>Playlists</h1>
       {{!-- get playlist complexion --}}
       <form method="POST" action="/playlist">
         <p>Get number of videos from different channels in a playlist</p>
@@ -81,9 +80,11 @@
     </div>
 
     <div class="results-section">
-      <a href="/playlist" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
-        Refresh results
-      </a>
+      <div class="showall">
+        <a href="/playlist" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
+          Show all playlists
+        </a>
+      </div>
       {{!-- complete playlists table --}}
       {{#if allPlaylists}}
       <table class="results-table">
@@ -145,12 +146,6 @@
         </tbody>
       </table>
       {{/if}}
-
-      {{!-- <ul>
-        {{#each playlists}}
-        <li>{{pname}}, {{description}}, {{uname}}</li>
-        {{/each}}
-      </ul> --}}
     </div>
   </div>
 </body>

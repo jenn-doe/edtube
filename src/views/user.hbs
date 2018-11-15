@@ -34,7 +34,7 @@
             <a class="navlink" id="trendinglink" href="trending">Trending</a>
           </li>
           <li>
-            <a class="navlink" id="trendinglink" href="myChannels">My Channels</a>
+            <a class="navlink" id="channelslink" href="myChannels">My Channels</a>
           </li>
         </span>
       </span>
@@ -48,8 +48,7 @@
   </div>
   <div class="main">
     <div class="input-section">
-      <h1>Welcome To Eddy Tube</h1>
-      <h2>Users</h2>
+      <h1>Users</h1>
       {{!-- add a user --}}
       <form method="POST" action="/user">
         <p>Add new user</p>
@@ -99,19 +98,21 @@
       {{!-- get users who follow all other users --}}
       <form method="POST" action="/user">
         <p>Get user(s) who follow all other users</p>
-          <div class="tubeinput">
-            <input id="user-creepy-followers" class="form-control btn btn-info" type="submit" value="Get followers" name="get-creepy-followers"></p>
-          </div>
+        <div class="tubeinput">
+          <input id="user-creepy-followers" class="form-control btn btn-info" type="submit" value="Get super followers"
+            name="get-creepy-followers"></p>
+        </div>
       </form>
     </div>
 
     {{!-- results table --}}
     <div class="results-section">
-      <a href="/user" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
-        Refresh results
-      </a>
+      <div class="showall">
+        <a href="/user" class="form-control btn btn-success refresh" type="submit" value="Refresh results" name="refresh">
+          Show all users
+        </a>
+      </div>
       {{#if users}}
-      <h2>Users</h2>
       <table class="results-table">
         <thead>
           <tr>
@@ -138,26 +139,24 @@
       </table>
       {{/if}}
 
-        {{#if followers}}
-            <h2>Followers</h2>
-            <table class="results-table">
-                <thead>
-                <tr>
-                    <th>User Names</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each followers}}
-                    <tr>
-                        <td>{{follower_uname}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        {{/if}}
+      {{#if followers}}
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Users</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each followers}}
+          <tr>
+            <td>{{follower_uname}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
 
       {{#if videos}}
-      <h2>Videos</h2>
       <table class="results-table">
         <thead>
           <tr>
