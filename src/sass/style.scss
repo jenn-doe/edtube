@@ -101,7 +101,7 @@ body {
     }
 
     #myChannels {
-      margin-left: 1em;
+      margin-left: 0;
     }
 
     .results-section {
@@ -115,10 +115,21 @@ body {
         width: 100%;
       }
 
+      .results-error {
+        width: 100%;
+        margin-top: 6px;
+        text-align: center;
+
+        &--message {
+          color: $color-red;
+        }
+      }
+
       .results-table {
         border-collapse: collapse;
         width: 100%;
         margin-top: 6px;
+
         th {
           background-color: $color-almost-black;
           color: white;
