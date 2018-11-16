@@ -188,6 +188,15 @@
         </tbody>
       </table>
       {{/if}}
+
+      {{#if error}}
+      <table class="results-table">
+          <tr>
+          {{error}}
+          </tr>
+      </table>
+      {{/if}}
+
     </div>
   </div>
 </body>

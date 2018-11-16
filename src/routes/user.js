@@ -30,9 +30,9 @@ function updateBiography(uName, bio) {
 }
 
 function deleteUserVideos(uName) {
-    var deleteUserVideos = `DELETE FROM Video_PostedAt_Contains 
-    WHERE cName 
-    IN (SELECT cName 
+    var deleteUserVideos = `DELETE FROM Video_PostedAt_Contains
+    WHERE cName
+    IN (SELECT cName
         FROM Channel_Owns_BelongsTo
         WHERE uName= '${uName}');`;
 
@@ -85,7 +85,16 @@ router.post('/', (req, res, next) => {
                 res.render('user', {
                     users: users,
                     videos: null,
-                    followers: null
+                    followers: null,
+                    error: null
+                })})
+            .catch((err) => {
+                console.log("there was an error", err)
+                res.render('user', {
+                    users: null,
+                    videos: null,
+                    followers: null,
+                    error: "There was an error creating a new user. Please ensure you have a unique username and a valid postal code."
                 })});
     break;
     case "update-bio" : updateBiography(req.body["input-username"], req.body["input-bio"])
@@ -94,9 +103,18 @@ router.post('/', (req, res, next) => {
                 res.render('user', {
                     users: users,
                     videos: null,
-                    followers: null
+                    followers: null,
+                    error: null
                 })
-              });
+              })
+              .catch((err) => {
+                  console.log("there was an error", err)
+                  res.render('user', {
+                      users: null,
+                      videos: null,
+                      followers: null,
+                      error: "There was an error updating the bio. Please ensure you have the correct username."
+                  })});;
     break;
     case "delete-user-vids" : deleteUserVideos(req.body["input-username"])
         .then(getVideos)
@@ -104,18 +122,36 @@ router.post('/', (req, res, next) => {
             res.render('user', {
                 users: null,
                 videos: videos,
-                followers: null
+                followers: null,
+                error: null
             })
-          });
+          })
+          .catch((err) => {
+              console.log("there was an error", err)
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: null,
+                  error: "There was an error deleting the users videos. Please ensure you have the correct username."
+              })});;
     break;
     case "get-videos-user" : getUserVideos(req.body["input-username"])
         .then(videos => {
           res.render('user', {
             users: null,
             videos: videos,
-            followers: null
+            followers: null,
+            error: null
           })
-        });
+        })
+        .catch((err) => {
+            console.log("there was an error", err)
+            res.render('user', {
+                users: null,
+                videos: null,
+                followers: null,
+                error: "There was an error getting the users videos. Please ensure you have the correct username."
+            })});;
     break;
       case "get-followers" : getFolowers(req.body["input-username"])
           .then(followers => {
@@ -124,7 +160,15 @@ router.post('/', (req, res, next) => {
                   videos: null,
                   followers: followers
               })
-          });
+          })
+          .catch((err) => {
+              console.log("there was an error", err)
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: null,
+                  error: "There was an error getting the users followers. Please ensure you have the correct username."
+              })});
 
   }
 });

@@ -49,7 +49,7 @@ function createTableCategory() {
     catName		  VARCHAR(40),
     description	VARCHAR(280),
     PRIMARY KEY (catName)
-  )`;
+  );`;
   return db.any(sql);
 }
 
@@ -67,7 +67,7 @@ function insertCategory() {
       ('Cooking', 'Videos about cooking'),
       ('GlutenFree', 'Videos for the gluten free eaters'),
       ('Desserts', 'Videos for desserts!')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -77,7 +77,7 @@ function createTableStorage() {
       storageServer		VARCHAR(40),
       storageRegion		VARCHAR(40),
       PRIMARY KEY (storageServer)
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -88,7 +88,7 @@ function insertStorage() {
       ('MapleLeaf', 'Quebec'),
       ('GreenLeaf', 'WestCoast'),
       ('Maritimes', 'EastCoast')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -98,7 +98,7 @@ function createTableDateTime() {
       date			INTEGER,
       time			INTEGER,
       PRIMARY KEY (date, time)
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -109,8 +109,8 @@ function insertDateTime() {
     (01012018, 1147),
     (02032017, 2230),
     (06272018, 2318),
-    (06282018, 0023),
-    (06282018, 0027),
+    (06282018, 0123),
+    (06282018, 0127),
     (02222018, 1312),
     (02232018, 1426),
     (03142017, 2201),
@@ -123,7 +123,7 @@ function insertDateTime() {
     (07012018, 1423),
     (02252018, 1826),
     (06232018, 2236)
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -135,7 +135,7 @@ function createTableNetwork() {
       description	VARCHAR(280),
       email		   	VARCHAR(40),
       PRIMARY KEY (nName)
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -148,7 +148,7 @@ function insertNetwork() {
       ('WallStreetNetwork', 25, 'All the latest on stocks, business, and finance', 'wallstreet@network.com'),
       ('ZBOXNetwork', 35, 'Watch your favorite gamers', 'zbox@network.com'),
       ('MusicNetwork', 10, 'Listen to your favorite music', 'music@network.com')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -191,7 +191,7 @@ function createTablePlaylistCreates() {
       FOREIGN KEY (uName) REFERENCES TubeUser
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -202,7 +202,7 @@ function insertPlaylistCreates() {
       ('ChillTunes', 'music to relax to', 'julez'),
       ('DanceParty', 'lets get pumped', 'julez'),
       ('StudyTunes', 'music for studying to', 'choo')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -219,7 +219,7 @@ function createTableFollows() {
       FOREIGN KEY (followed_uName) REFERENCES TubeUser
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -236,7 +236,7 @@ function insertFollows() {
       ('Snoopy McSnooperson', 'halofiend'),
       ('Snoopy McSnooperson', 'choo'),
       ('Snoopy McSnooperson', 'Snoopy McSnooperson')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -254,7 +254,7 @@ function createTableChannelOwnsBelongsTo() {
       FOREIGN KEY (nName) REFERENCES Network
         ON DELETE SET NULL
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -268,7 +268,7 @@ function insertChannelOwnsBelongsTo() {
       ('MusicalTunes', 'Just a bunch of songs I listen to', 'halofiend', 'MusicNetwork'),
       ('MomsMeals', 'Recipes from the kitchen of a mother', 'jennyyy', 'FoodNetwork'),
       ('SickSnaps', 'Game clips of my sick skills', 'halofiend', 'ZBOXNetwork')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -285,7 +285,7 @@ function createTableSubscribe() {
       FOREIGN KEY (cName) REFERENCES Channel_Owns_BelongsTo
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -296,7 +296,7 @@ function insertSubscribe() {
       ('julez', 'MomsMeals', TRUE),
       ('choo', 'SickSnaps', FALSE),
       ('choo', 'WeekendFun', TRUE)
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -318,7 +318,7 @@ function createTableVideoPostedAtContains() {
       FOREIGN KEY (date, time) REFERENCES DateTime
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -327,8 +327,8 @@ function insertVideoPostedAtContains() {
   const sql =`
     INSERT INTO Video_PostedAt_Contains VALUES
       (1, 'hanging out at the beach', 'Beach Fun!', 230, 'WeekendFun', 06272018, 2318, 'MapleLeaf'),
-      (2, 'supper with my girls', 'BBQ Hut', 118, 'WeekendFun', 06282018, 0023, 'MapleLeaf'),
-      (3, 'club life foreverrrr', 'Dancing at QTs', 123, 'WeekendFun', 06282018, 0027, 'MapleLeaf'),
+      (2, 'supper with my girls', 'BBQ Hut', 118, 'WeekendFun', 06282018, 0123, 'MapleLeaf'),
+      (3, 'club life foreverrrr', 'Dancing at QTs', 123, 'WeekendFun', 06282018, 0127, 'MapleLeaf'),
       (4, 'chicken in a white sauce with veggies', 'chicken a la king', 1210, 'MomsMeals', 02222018, 1312, 'EastCoast'),
       (5, 'Smooth chocolate mousse without flour', 'Gluten Free Chocolate Cake', 1023, 'MomsMeals', 02232018, 1426, 'EastCoast'),
       (6, 'Snipes for dayyyyys in multiplayer', 'Sniping fools', 134, 'SickSnaps', 03142017, 2201, 'WestCoast'),
@@ -345,7 +345,7 @@ function insertVideoPostedAtContains() {
       (17, 'the hippest beats ever', 'Bounce Beats', 329, 'Music', 06302018, 0927, 'WestCoast'),
       (18, 'dance music beats', 'Dance life', 553, 'Music', 08062018, 1133, 'WestCoast'),
       (19, 'sleepytime songs', 'Relaxing Sleep Songs', 425, 'Music', 09242018, 1027, 'WestCoast')
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -359,7 +359,7 @@ function createTableMonetized() {
       FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -370,7 +370,7 @@ function insertMonetized() {
       (4, 100, 10),
       (5, 100, 10),
       (6, 80, 5)
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -390,7 +390,7 @@ function createTablePartOf() {
       FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -410,7 +410,7 @@ function insertPartOf() {
       ('StudyTunes', 'choo', 12),
       ('StudyTunes', 'choo', 13),
       ('StudyTunes', 'choo', 14)
-  `;
+  ;`;
   return db.any(sql);
 }
 
@@ -426,7 +426,7 @@ function createTableClassified() {
       FOREIGN KEY (catName) REFERENCES Category
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -470,7 +470,7 @@ function createTableCommentWrites() {
       FOREIGN KEY (vID) REFERENCES Video_PostedAt_Contains
         ON DELETE CASCADE
         ON UPDATE CASCADE
-    )`;
+    );`;
   return db.any(sql);
 }
 
@@ -482,13 +482,13 @@ function insertCommentWrites() {
       (2, 'Wish I could have been there', 07012018, 1423, 'choo', 1),
       (3, 'This looks so delicious, I want to eat it NOW', 02252018, 1826, 'julez', 5),
       (4, 'So sick dude', 06232018, 2236, 'choo', 7)
-  `;
+  ;`;
   return db.any(sql);
 }
 
 function createView() {
   const sql =`
-    CREATE VIEW JulezChannels AS 
+    CREATE VIEW JulezChannels AS
     SELECT   c.cname, c.description
     FROM     Channel_Owns_BelongsTo c
     WHERE    c.uName = 'julez'

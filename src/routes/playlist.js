@@ -9,8 +9,8 @@ function getPlaylist() {
 }
 
 function deletePlaylist(pName, uName) {
-    var playlistToDelete = `DELETE FROM Playlist_Creates WHERE pName = '${pName}' AND uName = '${uName}';`;
-    return db.any(playlistToDelete);
+    var playlistToDelete = `DELETE FROM Playlist_Creates WHERE pName = '${pName}' AND uName = '${uName}' returning uName;`;
+    return db.oneOrNone(playlistToDelete);
 }
 
 function getVideosInPlaylist(pName, uName) {
@@ -71,6 +71,12 @@ router.post('/', (req, res, next) => {
     break;
     case "delete-playlist" :
       deletePlaylist(req.body["input-pname"], req.body["input-uname"])
+        .then((res) => {
+          console.log(res)
+          if (res == null) {
+            throw new Error
+          }
+        })
         .then(getPlaylist)
           .then(allPlaylists => {
             res.render('playlist', {
@@ -78,7 +84,14 @@ router.post('/', (req, res, next) => {
               vidsInPlaylist: null,
               allPlaylists: allPlaylists
             })})
-          .catch((err) => console.log(err));
+          .catch((err) => {
+              console.log("there was an error", err)
+              res.render('playlist', {
+                  users: null,
+                  videos: null,
+                  followers: null,
+                  error: "There was an error deleting the playlist. Please ensure you have the correct username and playlist."
+              })});
     break;
   }
 
