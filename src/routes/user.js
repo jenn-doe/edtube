@@ -25,8 +25,8 @@ function insertNewUser(uName, bio, name, email, address, postalCode) {
 }
 
 function updateBiography(uName, bio) {
-    var updateBiography = `UPDATE TubeUser SET biography = '${bio}' WHERE uName = '${uName}';`;
-    return db.any(updateBiography);
+    var updateBiography = `UPDATE TubeUser SET biography = '${bio}' WHERE uName = '${uName}' returning uName;`;
+    return db.oneOrNone(updateBiography);
 }
 
 function deleteUserVideos(uName) {
@@ -34,12 +34,13 @@ function deleteUserVideos(uName) {
     WHERE cName
     IN (SELECT cName
         FROM Channel_Owns_BelongsTo
-        WHERE uName= '${uName}');`;
+        WHERE uName= '${uName}')
+        returning cName;`;
 
     return db.any(deleteUserVideos);
 }
 
-function getFolowers(uName) {
+function getFollowers(uName) {
     var sql = `
     SELECT follower_uName
     FROM   Follows
@@ -66,7 +67,8 @@ router.get('/', (req, res, next) => {
       res.render('user', {
         users: users,
         videos: null,
-        followers: null
+        followers: null,
+        error: null
     });
   });
 });
@@ -98,6 +100,11 @@ router.post('/', (req, res, next) => {
                 })});
     break;
     case "update-bio" : updateBiography(req.body["input-username"], req.body["input-bio"])
+            .then(res => {
+              if (res = null) {
+                throw new Error
+              }
+            })
             .then(getUsers)
             .then(users => {
                 res.render('user', {
@@ -117,14 +124,28 @@ router.post('/', (req, res, next) => {
                   })});;
     break;
     case "delete-user-vids" : deleteUserVideos(req.body["input-username"])
+        .then(res => {
+          if (res = null) {
+            throw new Error
+          }
+        })
         .then(getVideos)
         .then(videos => {
+          if (videos < 1) {
+            res.render('user', {
+                users: null,
+                videos: null,
+                followers: null,
+                error: "There were no videos returned"
+            })
+          } else {
             res.render('user', {
                 users: null,
                 videos: videos,
                 followers: null,
                 error: null
             })
+          }
           })
           .catch((err) => {
               console.log("there was an error", err)
@@ -137,40 +158,41 @@ router.post('/', (req, res, next) => {
     break;
     case "get-videos-user" : getUserVideos(req.body["input-username"])
         .then(videos => {
-          res.render('user', {
-            users: null,
-            videos: videos,
-            followers: null,
-            error: null
-          })
-        })
-        .catch((err) => {
-            console.log("there was an error", err)
+          if (videos < 1) {
             res.render('user', {
                 users: null,
                 videos: null,
                 followers: null,
-                error: "There was an error getting the users videos. Please ensure you have the correct username."
-            })});;
+                error: "This user has no videos. If you think this is in error, please ensure you have the correct username."
+            })
+          } else {
+            res.render('user', {
+              users: null,
+              videos: videos,
+              followers: null,
+              error: null
+            })
+          }
+        });
     break;
-      case "get-followers" : getFolowers(req.body["input-username"])
+      case "get-followers" : getFollowers(req.body["input-username"])
           .then(followers => {
+            if (followers < 1) {
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: null,
+                  error: "This user has no followers. If you think this is in error, please ensure you have the correct username."
+              })
+            } else {
               res.render('user', {
                   users: null,
                   videos: null,
                   followers: followers
               })
-          })
-          .catch((err) => {
-              console.log("there was an error", err)
-              res.render('user', {
-                  users: null,
-                  videos: null,
-                  followers: null,
-                  error: "There was an error getting the users followers. Please ensure you have the correct username."
-              })});
-
-  }
-});
+            }
+      })
+      break;
+    }});
 
 module.exports = router;

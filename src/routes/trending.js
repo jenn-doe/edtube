@@ -9,7 +9,8 @@ router.get("/", (req, res, next) => {
     res.render("trending", {
       channels: null,
       topcat: null,
-      allchannels: allchannels
+      allchannels: allchannels,
+      error: null
     });
   });
 });
@@ -27,7 +28,7 @@ function getChannelsFromPostalCode(postalCode) {
 
 function getTopCategory() {
   const sql = `
-  CREATE OR REPLACE VIEW TopCategories AS 
+  CREATE OR REPLACE VIEW TopCategories AS
   SELECT   cat.catName, cat.description, COUNT(*) AS COUNT
   FROM     Category cat, Classified cl, Video_PostedAt_Contains v
   WHERE    cat.catName = cl.catName
@@ -60,30 +61,62 @@ router.post("/", (req, res, next) => {
 
   switch (operation) {
     case "get-channels":
-      getChannelsFromPostalCode(req.body["input-postalcode"]).then(channels => {
-        res.render("trending", {
-          channels: channels,
-          topcat: null,
-          allchannels: null
-        });
+      getChannelsFromPostalCode(req.body["input-postalcode"])
+      .then(channels => {
+        if (channels < 1) {
+          res.render('trending', {
+              users: null,
+              videos: null,
+              followers: null,
+              error: "There were no channels for this postalcode. If you think this is in error, please ensure the postalcode is valid."
+          })
+        } else {
+          res.render("trending", {
+            channels: channels,
+            topcat: null,
+            allchannels: null,
+            error: null
+          })}
       });
       break;
     case "get-category":
-      getTopCategory().then(topcat => {
-        res.render("trending", {
-          channels: null,
-          topcat: topcat,
-          allchannels: null
+      getTopCategory()
+        .then(topcat => {
+          if (topcat < 1) {
+            res.render('trending', {
+                users: null,
+                videos: null,
+                followers: null,
+                error: "There was no top category."
+            })
+          } else {
+            res.render("trending", {
+              channels: null,
+              topcat: topcat,
+              allchannels: null,
+              error: null
+            });
+          }
         });
-      });
       break;
     case "get-all-channels":
-      getAllChannels().then(allchannels => {
-        res.render("trending", {
-          channels: null,
-          topcat: null,
-          allchannels: allchannels
-        });
+      getAllChannels()
+        .then(allchannels => {
+          if (allchannels < 1) {
+            res.render("trending", {
+              channels: null,
+              topcat: null,
+              allchannels: allchannels,
+              error: null
+            })
+          } else {
+            res.render('trending', {
+                users: null,
+                videos: null,
+                followers: null,
+                error: "There are no channels to display."
+            })
+          }
       });
       break;
   }
