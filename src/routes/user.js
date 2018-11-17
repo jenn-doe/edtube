@@ -4,7 +4,7 @@ const db = require('../db');
 let router = express.Router();
 
 function getUsers() {
-  var getUsers = `SELECT * FROM TubeUser;`;
+  let getUsers = `SELECT * FROM TubeUser;`;
   return db.any(getUsers);
 }
 
@@ -19,18 +19,18 @@ function getVideos() {
 }
 
 function insertNewUser(uName, bio, name, email, address, postalCode) {
-    var insertNewUser = `INSERT INTO TubeUser VALUES
+    let insertNewUser = `INSERT INTO TubeUser VALUES
     ('${uName}', '${bio}', '${name}', '${email}', '${address}', '${postalCode}');`;
     return db.any(insertNewUser);
 }
 
 function updateBiography(uName, bio) {
-    var updateBiography = `UPDATE TubeUser SET biography = '${bio}' WHERE uName = '${uName}' returning uName;`;
+    let updateBiography = `UPDATE TubeUser SET biography = '${bio}' WHERE uName = '${uName}' returning uName;`;
     return db.oneOrNone(updateBiography);
 }
 
 function deleteUserVideos(uName) {
-    var deleteUserVideos = `DELETE FROM Video_PostedAt_Contains
+    let deleteUserVideos = `DELETE FROM Video_PostedAt_Contains
     WHERE cName
     IN (SELECT cName
         FROM Channel_Owns_BelongsTo
@@ -41,7 +41,7 @@ function deleteUserVideos(uName) {
 }
 
 function getFollowers(uName) {
-    var sql = `
+    let sql = `
     SELECT follower_uName
     FROM   Follows
     WHERE  followed_uName = '${uName}'
@@ -49,9 +49,21 @@ function getFollowers(uName) {
     return db.any(sql);
 }
 
+function getCreepyFollowers() {
+    let sql = `
+    SELECT follower_uName FROM Follows as f 
+    WHERE NOT EXISTS ((
+        SELECT tu.uName FROM TubeUser tu) 
+        EXCEPT (
+            SELECT f2.Followed_uName FROM Follows as f2 
+            WHERE f2.Follower_uName = f.Follower_uName)) 
+    GROUP BY follower_uName;`;
+    return db.any(sql);
+}
+
 function getUserVideos(uName) {
-    var sql = `
-    SELECT *
+    let sql = `
+    SELECT *let
     FROM   TubeUser u, Channel_Owns_BelongsTo c, Video_PostedAt_Contains v
     WHERE  u.uName = c.uName
     AND    c.cName = v.cName
@@ -91,7 +103,7 @@ router.post('/', (req, res, next) => {
                     error: null
                 })})
             .catch((err) => {
-                console.log("there was an error", err)
+                console.log("there was an error", err);
                 res.render('user', {
                     users: null,
                     videos: null,
@@ -115,13 +127,13 @@ router.post('/', (req, res, next) => {
                 })
               })
               .catch((err) => {
-                  console.log("there was an error", err)
+                  console.log("there was an error", err);
                   res.render('user', {
                       users: null,
                       videos: null,
                       followers: null,
                       error: "There was an error updating the bio. Please ensure you have the correct username."
-                  })});;
+                  })});
     break;
     case "delete-user-vids" : deleteUserVideos(req.body["input-username"])
         .then(res => {
@@ -148,13 +160,13 @@ router.post('/', (req, res, next) => {
           }
           })
           .catch((err) => {
-              console.log("there was an error", err)
+              console.log("there was an error", err);
               res.render('user', {
                   users: null,
                   videos: null,
                   followers: null,
                   error: "There was an error deleting the users videos. Please ensure you have the correct username."
-              })});;
+              })});
     break;
     case "get-videos-user" : getUserVideos(req.body["input-username"])
         .then(videos => {
@@ -177,6 +189,15 @@ router.post('/', (req, res, next) => {
     break;
       case "get-followers" : getFollowers(req.body["input-username"])
           .then(followers => {
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: followers
+              })
+          });
+      break;
+      case "get-creepy-followers" : getCreepyFollowers()
+          .then(followers => {
             if (followers < 1) {
               res.render('user', {
                   users: null,
@@ -191,7 +212,7 @@ router.post('/', (req, res, next) => {
                   followers: followers
               })
             }
-      })
+      });
       break;
     }});
 
