@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const index = require("./routes/index");
-const example = require("./routes/example");
 const user = require("./routes/user");
 const playlist = require("./routes/playlist");
 const trending = require("./routes/trending");
@@ -32,7 +31,6 @@ app.set("view engine", "hbs");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/", index);
-app.use("/example", example);
 app.use("/user", user);
 app.use("/playlist", playlist);
 app.use("/trending", trending);

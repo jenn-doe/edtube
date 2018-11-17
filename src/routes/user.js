@@ -30,12 +30,13 @@ function updateBiography(uName, bio) {
 }
 
 function deleteUserVideos(uName) {
-    let deleteUserVideos = `DELETE FROM Video_PostedAt_Contains
+    let deleteUserVideos = `
+    DELETE FROM Video_PostedAt_Contains
     WHERE cName
     IN (SELECT cName
         FROM Channel_Owns_BelongsTo
         WHERE uName= '${uName}')
-        returning cName;`;
+    returning cName;`;
 
     return db.any(deleteUserVideos);
 }
@@ -51,13 +52,13 @@ function getFollowers(uName) {
 
 function getCreepyFollowers() {
     let sql = `
-    SELECT follower_uName FROM Follows as f 
-    WHERE NOT EXISTS ((
-        SELECT tu.uName FROM TubeUser tu) 
-        EXCEPT (
-            SELECT f2.Followed_uName FROM Follows as f2 
-            WHERE f2.Follower_uName = f.Follower_uName)) 
-    GROUP BY follower_uName;`;
+    SELECT DISTINCT(follower_uName) FROM Follows f 
+    WHERE NOT EXISTS (
+        (SELECT tu.uName FROM TubeUser tu) 
+        EXCEPT
+        (SELECT f2.Followed_uName FROM Follows f2 
+         WHERE f2.Follower_uName = f.Follower_uName)
+    );`;
     return db.any(sql);
 }
 
