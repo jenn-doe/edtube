@@ -55,6 +55,7 @@
         <div class="tubeinput">
           <input class="form-control" type="text" name="input-postalcode" placeholder="Postal code">
           <input id="trending-postalcode" class="form-control btn btn-info" type="submit" value="Get channels" name="get-channels">
+          <p></p>
         </div>
       </form>
       {{!-- get category with most videos --}}
@@ -139,6 +140,13 @@
           {{/each}}
         </tbody>
       </table>
+      {{/if}}
+      {{#if error}}
+      <div class="results-error">
+        <h5 class="results-error--message">
+          {{error}}
+        </h5>
+      </div>
       {{/if}}
     </div>
   </div>
