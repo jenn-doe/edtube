@@ -63,7 +63,7 @@ function getCreepyFollowers() {
 
 function getUserVideos(uName) {
     let sql = `
-    SELECT *let
+    SELECT *
     FROM   TubeUser u, Channel_Owns_BelongsTo c, Video_PostedAt_Contains v
     WHERE  u.uName = c.uName
     AND    c.cName = v.cName
