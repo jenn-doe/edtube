@@ -9,6 +9,7 @@ function getPlaylist() {
 }
 
 function deletePlaylist(pName, uName) {
+  // Deliverable 10
   var playlistToDelete = `DELETE FROM Playlist_Creates 
     WHERE pName = '${pName}' AND uName = '${uName}' 
     RETURNING uName;`;
@@ -16,6 +17,7 @@ function deletePlaylist(pName, uName) {
 }
 
 function getVideosInPlaylist(pName, uName) {
+  // Deliverable 6
   var playlistToGet = `SELECT Video_PostedAt_Contains.vID AS vID, Video_PostedAt_Contains.description, Video_PostedAt_Contains.playtime
     FROM Video_PostedAt_Contains
     INNER JOIN PartOf ON PartOf.vID=Video_PostedAt_Contains.vID
@@ -24,6 +26,7 @@ function getVideosInPlaylist(pName, uName) {
 }
 
 function getNumVideosPerChannel(pName, uName) {
+  // Deliverable 7
   var playlistToGetChannelsFor = `SELECT Count(*), Video_PostedAt_Contains.cName
     FROM PartOf
     INNER JOIN Video_PostedAt_Contains ON PartOf.vID=Video_PostedAt_Contains.vID

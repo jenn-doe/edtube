@@ -81,7 +81,6 @@ function createTableStorage() {
   return db.any(sql);
 }
 
-// TODO
 function insertStorage() {
   const sql =`
     INSERT INTO Storage VALUES
@@ -102,7 +101,6 @@ function createTableDateTime() {
   return db.any(sql);
 }
 
-// TODO
 function insertDateTime() {
   const sql =`
     INSERT INTO DateTime VALUES
@@ -139,7 +137,6 @@ function createTableNetwork() {
   return db.any(sql);
 }
 
-// TODO
 function insertNetwork() {
   const sql =`
     INSERT INTO Network VALUES
@@ -195,7 +192,6 @@ function createTablePlaylistCreates() {
   return db.any(sql);
 }
 
-// TODO
 function insertPlaylistCreates() {
   const sql =`
     INSERT INTO Playlist_Creates VALUES
@@ -223,7 +219,6 @@ function createTableFollows() {
   return db.any(sql);
 }
 
-// TODO
 function insertFollows() {
   const sql =`
     INSERT INTO Follows VALUES
@@ -258,7 +253,6 @@ function createTableChannelOwnsBelongsTo() {
   return db.any(sql);
 }
 
-// TODO
 function insertChannelOwnsBelongsTo() {
   const sql =`
     INSERT INTO Channel_Owns_BelongsTo VALUES
@@ -289,7 +283,6 @@ function createTableSubscribe() {
   return db.any(sql);
 }
 
-// TODO
 function insertSubscribe() {
   const sql =`
     INSERT INTO Subscribe VALUES
@@ -322,7 +315,6 @@ function createTableVideoPostedAtContains() {
   return db.any(sql);
 }
 
-// TODO
 function insertVideoPostedAtContains() {
   const sql =`
     INSERT INTO Video_PostedAt_Contains VALUES
@@ -363,7 +355,6 @@ function createTableMonetized() {
   return db.any(sql);
 }
 
-// TODO
 function insertMonetized() {
   const sql =`
     INSERT INTO Monetized VALUES
@@ -394,7 +385,6 @@ function createTablePartOf() {
   return db.any(sql);
 }
 
-// TODO
 function insertPartOf() {
   const sql =`
     INSERT INTO PartOf VALUES
@@ -430,7 +420,6 @@ function createTableClassified() {
   return db.any(sql);
 }
 
-// TODO
 function insertClassified() {
   const sql =`
     INSERT INTO Classified VALUES
@@ -474,7 +463,6 @@ function createTableCommentWrites() {
   return db.any(sql);
 }
 
-// TODO
 function insertCommentWrites() {
   const sql =`
     INSERT INTO Comment_Writes VALUES
@@ -487,6 +475,7 @@ function insertCommentWrites() {
 }
 
 function createView() {
+  // Deliverable 11
   const sql =`
     CREATE VIEW JulezChannels AS
     SELECT   c.cname, c.description

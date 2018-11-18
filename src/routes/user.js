@@ -9,6 +9,7 @@ function getUsers() {
 }
 
 function getVideos() {
+  // Deliverable 5
   var getVideos = `
     SELECT *
     FROM   TubeUser u, Channel_Owns_BelongsTo c, Video_PostedAt_Contains v
@@ -19,17 +20,20 @@ function getVideos() {
 }
 
 function insertNewUser(uName, bio, name, email, address, postalCode) {
+    // Deliverable 2
     let insertNewUser = `INSERT INTO TubeUser VALUES
     ('${uName}', '${bio}', '${name}', '${email}', '${address}', '${postalCode}');`;
     return db.any(insertNewUser);
 }
 
 function updateBiography(uName, bio) {
+    // Deliverable 4
     let updateBiography = `UPDATE TubeUser SET biography = '${bio}' WHERE uName = '${uName}' returning uName;`;
     return db.oneOrNone(updateBiography);
 }
 
 function deleteUserVideos(uName) {
+    // Deliverable 3
     let deleteUserVideos = `
     DELETE FROM Video_PostedAt_Contains
     WHERE cName
@@ -42,6 +46,7 @@ function deleteUserVideos(uName) {
 }
 
 function getFollowers(uName) {
+    // Deliverable 8
     let sql = `
     SELECT follower_uName
     FROM   Follows

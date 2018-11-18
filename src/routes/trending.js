@@ -15,6 +15,7 @@ router.get("/", (req, res, next) => {
 });
 
 function getChannelsFromPostalCode(postalCode) {
+  // Deliverable 6
   const sql = `
     SELECT c.cName, c.description, u.uName
     FROM   TubeUser u, Channel_Owns_BelongsTo c
@@ -25,6 +26,7 @@ function getChannelsFromPostalCode(postalCode) {
 }
 
 function getTopCategory() {
+  // Deliverable 9
   const sql = `
   CREATE OR REPLACE VIEW TopCategories AS
   SELECT   cat.catName, cat.description, COUNT(*) AS COUNT
