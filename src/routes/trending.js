@@ -4,7 +4,6 @@ const db = require("../db");
 let router = express.Router();
 
 router.get("/", (req, res, next) => {
-  console.log("GET trending");
   getAllChannels().then(allchannels => {
     res.render("trending", {
       channels: null,
@@ -18,10 +17,9 @@ router.get("/", (req, res, next) => {
 function getChannelsFromPostalCode(postalCode) {
   const sql = `
     SELECT c.cName, c.description, u.uName
-    FROM   PostalCode p, TubeUser u, Channel_Owns_BelongsTo c
-    WHERE  p.postalCode = u.postalCode
-    AND    u.uName = c.uName
-    AND    p.postalCode = '${postalCode}'
+    FROM   TubeUser u, Channel_Owns_BelongsTo c
+    WHERE  u.uName = c.uName
+    AND    u.postalCode = '${postalCode}'
     ;`;
   return db.any(sql);
 }
@@ -54,9 +52,7 @@ function getAllChannels() {
 }
 
 router.post("/", (req, res, next) => {
-  console.log("POST trending");
   let html_keys = Object.keys(req.body);
-  console.log(html_keys);
   let operation = html_keys[html_keys.length - 1];
 
   switch (operation) {

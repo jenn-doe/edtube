@@ -45,18 +45,17 @@ function getFollowers(uName) {
     let sql = `
     SELECT follower_uName
     FROM   Follows
-    WHERE  followed_uName = '${uName}'
-    ;`;
+    WHERE  followed_uName = '${uName}';`;
     return db.any(sql);
 }
 
 function getCreepyFollowers() {
     let sql = `
-    SELECT DISTINCT(follower_uName) FROM Follows f 
+    SELECT DISTINCT(follower_uName) FROM Follows f
     WHERE NOT EXISTS (
-        (SELECT tu.uName FROM TubeUser tu) 
+        (SELECT tu.uName FROM TubeUser tu)
         EXCEPT
-        (SELECT f2.Followed_uName FROM Follows f2 
+        (SELECT f2.Followed_uName FROM Follows f2
          WHERE f2.Follower_uName = f.Follower_uName)
     );`;
     return db.any(sql);
@@ -74,7 +73,6 @@ function getUserVideos(uName) {
 }
 
 router.get('/', (req, res, next) => {
-  console.log('GET user');
   getUsers()
     .then(users => {
       res.render('user', {
@@ -87,9 +85,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  console.log('POST user');
   let html_keys = Object.keys(req.body);
-  console.log(html_keys);
   let operation = html_keys[html_keys.length - 1];
 
   switch (operation) {
@@ -104,7 +100,6 @@ router.post('/', (req, res, next) => {
                     error: null
                 })})
             .catch((err) => {
-                console.log("there was an error", err);
                 res.render('user', {
                     users: null,
                     videos: null,
@@ -114,7 +109,8 @@ router.post('/', (req, res, next) => {
     break;
     case "update-bio" : updateBiography(req.body["input-username"], req.body["input-bio"])
             .then(res => {
-              if (res = null) {
+              console.log(res)
+              if (res == null) {
                 throw new Error
               }
             })
@@ -128,7 +124,6 @@ router.post('/', (req, res, next) => {
                 })
               })
               .catch((err) => {
-                  console.log("there was an error", err);
                   res.render('user', {
                       users: null,
                       videos: null,
@@ -138,7 +133,8 @@ router.post('/', (req, res, next) => {
     break;
     case "delete-user-vids" : deleteUserVideos(req.body["input-username"])
         .then(res => {
-          if (res = null) {
+          console.log(res)
+          if (res < 1) {
             throw new Error
           }
         })
@@ -161,7 +157,6 @@ router.post('/', (req, res, next) => {
           }
           })
           .catch((err) => {
-              console.log("there was an error", err);
               res.render('user', {
                   users: null,
                   videos: null,
@@ -190,15 +185,6 @@ router.post('/', (req, res, next) => {
     break;
       case "get-followers" : getFollowers(req.body["input-username"])
           .then(followers => {
-              res.render('user', {
-                  users: null,
-                  videos: null,
-                  followers: followers
-              })
-          });
-      break;
-      case "get-creepy-followers" : getCreepyFollowers()
-          .then(followers => {
             if (followers < 1) {
               res.render('user', {
                   users: null,
@@ -210,7 +196,27 @@ router.post('/', (req, res, next) => {
               res.render('user', {
                   users: null,
                   videos: null,
-                  followers: followers
+                  followers: followers,
+                  error: null
+              })
+            }
+          });
+      break;
+      case "get-creepy-followers" : getCreepyFollowers()
+          .then(followers => {
+            if (followers < 1) {
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: null,
+                  error: "We couldn't find a user who follows all other users."
+              })
+            } else {
+              res.render('user', {
+                  users: null,
+                  videos: null,
+                  followers: followers,
+                  error: null
               })
             }
       });
