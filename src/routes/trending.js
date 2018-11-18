@@ -63,10 +63,10 @@ router.post("/", (req, res, next) => {
       .then(channels => {
         if (channels < 1) {
           res.render('trending', {
-              users: null,
-              videos: null,
-              followers: null,
-              error: "There were no channels for this postalcode. If you think this is in error, please ensure the postalcode is valid."
+            channels: null,
+            topcat: null,
+            allchannels: null,
+            error: "There were no channels for this postalcode. If you think this is in error, please ensure the postalcode is valid."
           })
         } else {
           res.render("trending", {
@@ -82,10 +82,10 @@ router.post("/", (req, res, next) => {
         .then(topcat => {
           if (topcat < 1) {
             res.render('trending', {
-                users: null,
-                videos: null,
-                followers: null,
-                error: "There was no top category."
+              channels: null,
+              topcat: topcat,
+              allchannels: null,
+              error: "There was no top category."
             })
           } else {
             res.render("trending", {
@@ -109,10 +109,10 @@ router.post("/", (req, res, next) => {
             })
           } else {
             res.render('trending', {
-                users: null,
-                videos: null,
-                followers: null,
-                error: "There are no channels to display."
+              channels: null,
+              topcat: null,
+              allchannels: null,
+              error: "There are no channels to display."
             })
           }
       });

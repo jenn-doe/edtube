@@ -10,8 +10,8 @@ function getPlaylist() {
 
 function deletePlaylist(pName, uName) {
   // Deliverable 10
-  var playlistToDelete = `DELETE FROM Playlist_Creates 
-    WHERE pName = '${pName}' AND uName = '${uName}' 
+  var playlistToDelete = `DELETE FROM Playlist_Creates
+    WHERE pName = '${pName}' AND uName = '${uName}'
     RETURNING uName;`;
   return db.oneOrNone(playlistToDelete);
 }
@@ -67,9 +67,9 @@ router.post("/", (req, res, next) => {
         })
         .catch(err => {
           res.render("playlist", {
-            users: null,
-            videos: null,
-            followers: null,
+            numPerChan: null,
+            vidsInPlaylist: null,
+            allPlaylists: null,
             error:
               "There are no videos in this playlist. If you think this is an error, please ensure you have the correct username and playlist."
           });
@@ -91,9 +91,9 @@ router.post("/", (req, res, next) => {
         })
         .catch(err => {
           res.render("playlist", {
-            users: null,
-            videos: null,
-            followers: null,
+            numPerChan: null,
+            vidsInPlaylist: null,
+            allPlaylists: null,
             error:
               "There was an error getting the videos. Please ensure you have the correct username and playlist."
           });
@@ -117,9 +117,9 @@ router.post("/", (req, res, next) => {
         })
         .catch(err => {
           res.render("playlist", {
-            users: null,
-            videos: null,
-            followers: null,
+            numPerChan: null,
+            vidsInPlaylist: null,
+            allPlaylists: null,
             error:
               "There was an error deleting the playlist. Please ensure you have the correct username and playlist."
           });
