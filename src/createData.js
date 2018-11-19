@@ -37,8 +37,15 @@ function insertPostalCode() {
   const sql = `
     INSERT INTO PostalCode VALUES
       ('A1B2C3', 'Toronto', 'Ontario'),
+      ('A1C2C3', 'Toronto', 'Ontario'),
+      ('A1D2C3', 'Toronto', 'Ontario'),
       ('V1N2K5', 'Vancouver', 'British Columbia'),
-      ('K1J1B7', 'Gloucester', 'Ontario')
+      ('V1Z2K5', 'Vancouver', 'British Columbia'),
+      ('V2M8K5', 'Vancouver', 'British Columbia'),
+      ('V1N3K6', 'Vancouver', 'British Columbia'),
+      ('K1J1B7', 'Gloucester', 'Ontario'),
+      ('K1J2B7', 'Gloucester', 'Ontario'),
+      ('K2J4D7', 'Gloucester', 'Ontario')
     ;`;
   return db.any(sql);
 }
@@ -86,7 +93,9 @@ function insertStorage() {
     INSERT INTO Storage VALUES
       ('MapleLeaf', 'Quebec'),
       ('GreenLeaf', 'WestCoast'),
-      ('Maritimes', 'EastCoast')
+      ('Maritimes', 'EastCoast'),
+      ('Island', 'PEI'),
+      ('Newf', 'Newfoundland')
   ;`;
   return db.any(sql);
 }
@@ -120,7 +129,9 @@ function insertDateTime() {
     (07012018, 1234),
     (07012018, 1423),
     (02252018, 1826),
-    (06232018, 2236)
+    (06232018, 2236),
+    (06232018, 2340),
+    (06232018, 2336)
   ;`;
   return db.any(sql);
 }
@@ -197,7 +208,9 @@ function insertPlaylistCreates() {
     INSERT INTO Playlist_Creates VALUES
       ('ChillTunes', 'music to relax to', 'julez'),
       ('DanceParty', 'lets get pumped', 'julez'),
-      ('StudyTunes', 'music for studying to', 'choo')
+      ('MyFavs', 'my favorite music', 'choo'),
+      ('StudyTunes', 'music for studying to', 'choo'),
+      ('HeadShotCompilation', 'All of the halo 5 game types', 'halofiend')
   ;`;
   return db.any(sql);
 }
@@ -287,8 +300,10 @@ function insertSubscribe() {
   const sql =`
     INSERT INTO Subscribe VALUES
       ('julez', 'MomsMeals', TRUE),
+      ('julez', 'Music', TRUE),
       ('choo', 'SickSnaps', FALSE),
-      ('choo', 'WeekendFun', TRUE)
+      ('choo', 'WeekendFun', TRUE),
+      ('choo', 'MusicalTunes', TRUE)
   ;`;
   return db.any(sql);
 }
@@ -336,7 +351,11 @@ function insertVideoPostedAtContains() {
       (16, 'the best music for relaxing to', 'Chill tune time', 335, 'Music', 06302018, 0923, 'WestCoast'),
       (17, 'the hippest beats ever', 'Bounce Beats', 329, 'Music', 06302018, 0927, 'WestCoast'),
       (18, 'dance music beats', 'Dance life', 553, 'Music', 08062018, 1133, 'WestCoast'),
-      (19, 'sleepytime songs', 'Relaxing Sleep Songs', 425, 'Music', 09242018, 1027, 'WestCoast')
+      (19, 'sleepytime songs', 'Relaxing Sleep Songs', 425, 'Music', 09242018, 1027, 'WestCoast'),
+      (20, 'more happy tunes', 'Happiness by the kw', 435, 'Music', 06302018, 0923, 'PEI'),
+      (21, 'happy songs', 'Happy by P', 349, 'Music', 06302018, 0927, 'Newfoundland'),
+      (22, 'more game play', 'Warzone', 253, 'SickSnaps', 08062018, 1133, 'Newfoundland'),
+      (23, 'game play video', 'Arena on Truth', 415, 'SickSnaps', 09242018, 1027, 'Newfoundland')
   ;`;
   return db.any(sql);
 }
@@ -360,6 +379,8 @@ function insertMonetized() {
     INSERT INTO Monetized VALUES
       (4, 100, 10),
       (5, 100, 10),
+      (23, 80, 10),
+      (22, 80, 10),
       (6, 80, 5)
   ;`;
   return db.any(sql);
@@ -399,7 +420,11 @@ function insertPartOf() {
       ('DanceParty', 'julez', 18),
       ('StudyTunes', 'choo', 12),
       ('StudyTunes', 'choo', 13),
-      ('StudyTunes', 'choo', 14)
+      ('StudyTunes', 'choo', 14),
+      ('HeadShotCompilation', 'halofiend', 22),
+      ('HeadShotCompilation', 'halofiend', 23),
+      ('MyFavs', 'choo', 20),
+      ('MyFavs', 'choo', 21)
   ;`;
   return db.any(sql);
 }
@@ -469,7 +494,9 @@ function insertCommentWrites() {
       (1, 'Looks like so much fun honey!', 07012018, 1234, 'jennyyy', 1),
       (2, 'Wish I could have been there', 07012018, 1423, 'choo', 1),
       (3, 'This looks so delicious, I want to eat it NOW', 02252018, 1826, 'julez', 5),
-      (4, 'So sick dude', 06232018, 2236, 'choo', 7)
+      (4, 'So sick dude', 06232018, 2236, 'choo', 7),
+      (5, 'get out of here with that', 06232018, 2340, 'choo', 22),
+      (6, 'whaaaaaaaat', 06232018, 2336, 'choo', 23)
   ;`;
   return db.any(sql);
 }

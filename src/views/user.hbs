@@ -79,6 +79,14 @@
           <input id="user-updatebio" class="form-control btn btn-info" type="submit" value="Update bio" name="update-bio"></p>
         </div>
       </form>
+      {{!-- get all videos --}}
+      <form method="POST" action="/user">
+        <p>Get all videos</p>
+        <div class="tubeinput">
+          <input id="get-user-vids" class="form-control btn btn-info" type="submit" value="Get user videos"
+            name="get-user-vids"></p>
+        </div>
+      </form>
       {{!-- get all videos that belong to a user's channel --}}
       <form method="POST" action="/user">
         <p>Get all of a user's videos</p>

@@ -169,6 +169,24 @@ router.post('/', (req, res, next) => {
                   error: "There was an error deleting the users videos. Please ensure you have the correct username."
               })});
     break;
+    case "get-user-vids" : getVideos()
+        .then(videos => {
+          if (videos < 1) {
+            res.render('user', {
+                users: null,
+                videos: null,
+                followers: null,
+                error: "There was an error retrieving videos."
+            })
+          } else {
+            res.render('user', {
+                users: null,
+                videos: videos,
+                followers: null,
+                error: null
+            })
+        }});
+    break;
     case "get-videos-user" : getUserVideos(req.body["input-username"])
         .then(videos => {
           if (videos < 1) {
